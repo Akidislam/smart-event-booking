@@ -1,0 +1,38 @@
+
+  Dropping all tables  19ms DONE
+
+   INFO  Preparing database.  
+
+  Creating migration table  21ms DONE
+
+   INFO  Running migrations.  
+
+  2014_10_12_000000_create_users_table  20ms DONE
+  2014_10_12_100000_create_password_resets_table  9ms DONE
+  2019_08_19_000000_create_failed_jobs_table  18ms DONE
+  2019_12_14_000001_create_personal_access_tokens_table  26ms DONE
+  2026_03_24_160559_create_venues_table  17ms DONE
+  2026_03_24_160631_create_events_table  10ms DONE
+  2026_03_24_160702_create_bookings_table  20ms DONE
+  2026_03_24_160733_add_google_fields_to_users_table  1ms FAIL
+
+   RuntimeException 
+
+  Changing columns for table "users" requires Doctrine DBAL. Please install the doctrine/dbal package.
+
+  at C:\Users\akidi\Desktop\Smart Event & Venue Booking System\vendor\laravel\framework\src\Illuminate\Database\Schema\Grammars\ChangeColumn.php:30
+     26▕      */
+     27▕     public static function compile($grammar, Blueprint $blueprint, Fluent $command, Connection $connection)
+     28▕     {
+     29▕         if (! $connection->isDoctrineAvailable()) {
+  ➜  30▕             throw new RuntimeException(sprintf(
+     31▕                 'Changing columns for table "%s" requires Doctrine DBAL. Please install the doctrine/dbal package.',
+     32▕                 $blueprint->getTable()
+     33▕             ));
+     34▕         }
+
+  1   C:\Users\akidi\Desktop\Smart Event & Venue Booking System\vendor\laravel\framework\src\Illuminate\Database\Schema\Grammars\Grammar.php:86
+      Illuminate\Database\Schema\Grammars\ChangeColumn::compile(Object(Illuminate\Database\Schema\Grammars\SQLiteGrammar), Object(Illuminate\Database\Schema\Blueprint), Object(Illuminate\Support\Fluent), Object(Illuminate\Database\SQLiteConnection))
+
+  2   C:\Users\akidi\Desktop\Smart Event & Venue Booking System\vendor\laravel\framework\src\Illuminate\Database\Schema\Blueprint.php:135
+      Illuminate\Database\Schema\Grammars\Grammar::compileChange(Object(Illuminate\Database\Schema\Blueprint), Object(Illuminate\Support\Fluent), Object(Illuminate\Database\SQLiteConnection))
