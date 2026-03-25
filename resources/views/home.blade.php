@@ -109,7 +109,7 @@
     border-radius: var(--radius-lg); padding: 4rem;
     text-align: center; position: relative; overflow: hidden;
 }
-.cta-banner::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(99,102,241,0.08), transparent); }
+.cta-banner::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(99,102,241,0.08), transparent); pointer-events: none; }
 .cta-banner h2 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; }
 .cta-banner p { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 2rem; }
 

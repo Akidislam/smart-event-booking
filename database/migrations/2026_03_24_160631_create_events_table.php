@@ -20,7 +20,7 @@ return new class extends Migration
             $table->decimal('ticket_price', 10, 2)->default(0);
             $table->boolean('is_free')->default(true);
             $table->boolean('is_public')->default(true);
-            $table->enum('status', ['draft', 'published', 'cancelled', 'completed'])->default('draft');
+            $table->enum('status', ['pending', 'approved', 'rejected', 'completed', 'cancelled'])->default('pending');
             $table->string('google_calendar_event_id')->nullable();
             $table->foreignId('venue_id')->nullable()->constrained()->onDelete('set null');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');

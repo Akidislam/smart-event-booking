@@ -68,9 +68,9 @@ class Event extends Model
         return $this->bookings()->where('status', '!=', 'cancelled')->sum('attendees');
     }
 
-    public function scopePublished($query)
+    public function scopeApproved($query)
     {
-        return $query->where('status', 'published');
+        return $query->where('status', 'approved');
     }
 
     public function scopeUpcoming($query)

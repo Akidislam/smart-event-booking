@@ -17,7 +17,7 @@ class HomeController extends Controller
             ->take(6)
             ->get();
 
-        $upcomingEvents = Event::published()
+        $upcomingEvents = Event::approved()
             ->upcoming()
             ->with(['venue', 'user'])
             ->orderBy('start_datetime')
@@ -26,7 +26,7 @@ class HomeController extends Controller
 
         $stats = [
             'venues' => Venue::active()->count(),
-            'events' => Event::published()->count(),
+            'events' => Event::approved()->count(),
             'bookings' => Booking::where('status', 'confirmed')->count(),
             'users' => \App\Models\User::count(),
         ];

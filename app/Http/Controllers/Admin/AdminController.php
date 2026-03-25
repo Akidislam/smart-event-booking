@@ -114,4 +114,16 @@ class AdminController extends Controller
         $events = $query->latest()->paginate(20);
         return view('admin.events', compact('events'));
     }
+
+    public function approveEvent(Event $event)
+    {
+        $event->update(['status' => 'approved']);
+        return back()->with('success', 'Event approved successfully.');
+    }
+
+    public function rejectEvent(Event $event)
+    {
+        $event->update(['status' => 'rejected']);
+        return back()->with('success', 'Event rejected.');
+    }
 }

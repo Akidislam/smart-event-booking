@@ -19,7 +19,7 @@ class EventController extends Controller
 
     public function index(Request $request)
     {
-        $query = Event::published()->upcoming()->with(['venue', 'user']);
+        $query = Event::approved()->upcoming()->with(['venue', 'user']);
 
         if ($request->filled('category')) {
             $query->where('category', $request->category);
@@ -76,7 +76,7 @@ class EventController extends Controller
         ]);
 
         $validated['user_id'] = Auth::id();
-        $validated['status'] = 'published';
+        $validated['status'] = 'pending';
 
         if ($request->hasFile('banner_image')) {
             $validated['banner_image'] = $request->file('banner_image')->store('events', 'public');
@@ -120,7 +120,7 @@ class EventController extends Controller
             'ticket_price' => 'nullable|numeric|min:0',
             'is_free' => 'boolean',
             'is_public' => 'boolean',
-            'status' => 'in:draft,published,cancelled',
+            'status' => 'in:pending,approved,rejected,cancelled',
             'venue_id' => 'nullable|exists:venues,id',
         ]);
 

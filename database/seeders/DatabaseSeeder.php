@@ -111,7 +111,7 @@ class DatabaseSeeder extends Seeder
             'max_attendees' => 800,
             'ticket_price' => 2500,
             'is_free' => false,
-            'status' => 'published',
+            'status' => 'approved',
             'banner_image' => null, // fallback will be used
         ]);
 
@@ -126,7 +126,7 @@ class DatabaseSeeder extends Seeder
             'max_attendees' => 150,
             'ticket_price' => 0,
             'is_free' => true,
-            'status' => 'published',
+            'status' => 'approved',
         ]);
 
         // 6. Seed Bookings

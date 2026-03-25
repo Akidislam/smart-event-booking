@@ -52,7 +52,7 @@ class VenueController extends Controller
     public function show(Venue $venue)
     {
         $venue->load(['user', 'events' => function ($q) {
-            $q->published()->upcoming()->orderBy('start_datetime');
+            $q->approved()->upcoming()->orderBy('start_datetime');
         }]);
 
         $relatedVenues = Venue::active()
