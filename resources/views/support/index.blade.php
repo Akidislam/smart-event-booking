@@ -124,13 +124,13 @@
 
 <!-- Page Header -->
 <div class="page-header pb-4 mb-0 text-center">
-    <div class="container-sm">
+    <div class="container mx-auto px-4 max-w-3xl">
         <h1><i class="fas fa-headset" style="color:var(--primary-light);"></i> Support <span class="text-gradient">Center</span></h1>
         <p>Need help? Send us a message and our team will get back to you promptly.</p>
     </div>
 </div>
 
-<div class="container">
+<div class="container mx-auto px-4">
     <div class="support-wrap">
 
         <!-- Compose Card -->
@@ -151,7 +151,7 @@
                         <span class="text-danger fs-sm"><i class="fas fa-circle-exclamation"></i> {{ $message }}</span>
                     @enderror
                 </div>
-                <button type="submit" class="btn btn-primary">
+                <button type="submit" class="btn btn-primary w-full sm:w-auto">
                     <i class="fas fa-paper-plane"></i> Send Message
                 </button>
             </form>
@@ -183,7 +183,7 @@
             <div class="message-bubble-wrap">
                 <!-- User message (left) -->
                 <div class="msg-user">
-                    <img src="{{ auth()->user()->avatar_url }}" alt="You" class="msg-avatar">
+                    <img src="{{ auth()->user()->avatar_url }}" alt="You" class="msg-avatar w-full h-auto object-cover w-full h-auto object-cover">
                     <div class="msg-bubble">
                         <div class="msg-bubble-meta">
                             <span class="msg-sender">You</span>

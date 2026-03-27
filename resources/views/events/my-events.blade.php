@@ -4,19 +4,19 @@
 
 @section('content')
 <div class="page-header py-4 mb-4">
-    <div class="container d-flex justify-between align-center">
+    <div class="container mx-auto px-4 d-flex justify-between align-center">
         <div>
             <h1>My Managed <span class="text-gradient">Events</span></h1>
             <p>Track ticket sales, manage attendees, and update event details.</p>
         </div>
         <div class="d-flex gap-2">
-            <a href="{{ route('dashboard') }}" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Dashboard</a>
-            <a href="{{ route('events.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Create Event</a>
+            <a href="{{ route('dashboard') }}" class="btn btn-secondary w-full sm:w-auto"><i class="fas fa-arrow-left"></i> Dashboard</a>
+            <a href="{{ route('events.create') }}" class="btn btn-primary w-full sm:w-auto"><i class="fas fa-plus"></i> Create Event</a>
         </div>
     </div>
 </div>
 
-<div class="container mb-5">
+<div class="container mx-auto px-4 mb-5">
     <div class="card p-0 mb-5">
         <div class="table-wrap">
             <table style="width:100%; border-collapse:collapse;">
@@ -75,11 +75,11 @@
                         </td>
                         <td style="text-align:right; padding-right:1.5rem; vertical-align:middle;">
                             <div class="d-flex justify-between gap-2" style="justify-content:flex-end;">
-                                <a href="{{ route('events.show', $e) }}" class="btn btn-outline btn-sm" title="View Public Page"><i class="fas fa-external-link-alt"></i></a>
-                                <a href="{{ route('events.edit', $e) }}" class="btn btn-secondary btn-sm"><i class="fas fa-pen"></i> Edit</a>
+                                <a href="{{ route('events.show', $e) }}" class="btn btn-outline btn-sm w-full sm:w-auto" title="View Public Page"><i class="fas fa-external-link-alt"></i></a>
+                                <a href="{{ route('events.edit', $e) }}" class="btn btn-secondary w-full sm:w-auto"><i class="fas fa-pen"></i> Edit</a>
                                 <form action="{{ route('events.destroy', $e) }}" method="POST" onsubmit="return confirm('Delete this event? All associated bookings will be marked cancelled.');">
                                     @csrf @method('DELETE')
-                                    <button class="btn btn-outline btn-sm border-danger text-danger" title="Cancel Event"><i class="fas fa-trash"></i></button>
+                                    <button class="btn btn-outline btn-sm border-danger text-danger w-full sm:w-auto" title="Cancel Event"><i class="fas fa-trash"></i></button>
                                 </form>
                             </div>
                         </td>

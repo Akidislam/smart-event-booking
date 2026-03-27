@@ -410,7 +410,7 @@
                    class="contact-item {{ isset($withUser) && $withUser->id === $u->id ? 'active' : '' }}"
                    data-name="{{ strtolower($u->name) }}">
                     <div class="contact-avatar">
-                        <img src="{{ $u->avatar_url }}" alt="{{ $u->name }}">
+                        <img class="w-full h-auto object-cover w-full h-auto object-cover" src="{{ $u->avatar_url }}" alt="{{ $u->name }}">
                     </div>
                     <div class="contact-info">
                         <div class="contact-name">{{ $u->name }}</div>
@@ -427,7 +427,7 @@
                 @if($withUser)
                 <a href="{{ route('chat.index') }}" class="contact-item active">
                     <div class="contact-avatar">
-                        <img src="{{ $withUser->avatar_url }}" alt="{{ $withUser->name }}">
+                        <img class="w-full h-auto object-cover w-full h-auto object-cover" src="{{ $withUser->avatar_url }}" alt="{{ $withUser->name }}">
                     </div>
                     <div class="contact-info">
                         <div class="contact-name">{{ $withUser->name }}</div>
@@ -449,7 +449,7 @@
 
         {{-- Chat Header --}}
         <div class="chat-header">
-            <img src="{{ $withUser->avatar_url }}" alt="{{ $withUser->name }}">
+            <img class="w-full h-auto object-cover w-full h-auto object-cover" src="{{ $withUser->avatar_url }}" alt="{{ $withUser->name }}">
             <div>
                 <div class="chat-header-name">{{ $withUser->name }}</div>
                 <div class="chat-header-status">Online</div>
@@ -461,7 +461,7 @@
             @forelse($messages as $msg)
                 @php $mine = $msg->sender_id === $authUser->id; @endphp
                 <div class="msg-row {{ $mine ? 'mine' : 'theirs' }}" data-id="{{ $msg->id }}">
-                    <img class="msg-row-avatar" src="{{ $msg->sender->avatar_url }}" alt="{{ $msg->sender->name }}">
+                    <img class="msg-row-avatar w-full h-auto object-cover w-full h-auto object-cover" src="{{ $msg->sender->avatar_url }}" alt="{{ $msg->sender->name }}">
                     <div class="msg-col">
                         <div class="msg-sender-name">{{ $mine ? 'You' : $msg->sender->name }}</div>
                         <div class="msg-bubble">{{ $msg->message }}</div>
@@ -563,7 +563,7 @@
         row.className = `msg-row ${cls}`;
         row.dataset.id = msg.id;
         row.innerHTML = `
-            <img class="msg-row-avatar" src="${msg.sender_avatar}" alt="${msg.sender_name}">
+            <img class="msg-row-avatar w-full h-auto object-cover w-full h-auto object-cover" src="${msg.sender_avatar}" alt="${msg.sender_name}">
             <div class="msg-col">
                 <div class="msg-sender-name">${msg.is_mine ? 'You' : msg.sender_name}</div>
                 <div class="msg-bubble">${escHtml(msg.message)}</div>

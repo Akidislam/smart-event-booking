@@ -4,14 +4,14 @@
 
 @section('content')
 <div class="page-header pb-4 mb-4">
-    <div class="container">
+    <div class="container mx-auto px-4">
         <h1>Dashboard</h1>
         <p>Welcome back, {{ auth()->user()->name }}!</p>
     </div>
 </div>
 
-<div class="container py-4 mb-5">
-    <div class="grid-4 mb-5">
+<div class="container mx-auto px-4 py-4 mb-5">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-5">
         <div class="stat-card">
             <div class="stat-icon" style="background:rgba(99,102,241,0.1);color:var(--primary-light)"><i class="fas fa-ticket"></i></div>
             <div>
@@ -42,12 +42,12 @@
         </div>
     </div>
 
-    <div class="grid-2" style="grid-template-columns: 1.5fr 1fr;">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6" style="grid-template-columns: 1.5fr 1fr;">
         <!-- Recent Bookings -->
         <div class="card">
             <div class="card-body" style="padding:1.5rem 1.75rem; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:center;">
                 <h3 style="font-size:1.15rem; font-weight:700;"><i class="fas fa-clock text-primary"></i> Recent Bookings</h3>
-                <a href="{{ route('bookings.index') }}" class="btn btn-secondary btn-sm">View All</a>
+                <a href="{{ route('bookings.index') }}" class="btn btn-secondary w-full sm:w-auto">View All</a>
             </div>
             <div class="table-wrap">
                 <table>
@@ -87,7 +87,7 @@
         <div class="d-flex" style="flex-direction:column; gap:1.5rem;">
             <div class="card">
                 <div class="card-body text-center py-4">
-                    <img src="{{ auth()->user()->avatar_url }}" alt="Avatar" class="mb-3" style="width:80px;height:80px;border-radius:50%;border:3px solid var(--primary);object-fit:cover;">
+                    <img src="{{ auth()->user()->avatar_url }}" alt="Avatar" class="mb-3 w-full h-auto object-cover w-full h-auto object-cover" style="width:80px;height:80px;border-radius:50%;border:3px solid var(--primary);object-fit:cover;">
                     <h3 style="margin-bottom:.25rem;">{{ auth()->user()->name }}</h3>
                     <p class="text-muted mb-3 fs-sm">{{ auth()->user()->email }}</p>
                     <div class="badge badge-primary">{{ ucfirst(auth()->user()->role) }}</div>
@@ -99,9 +99,9 @@
                     <h3 style="font-size:1.15rem; font-weight:700;">Quick Actions</h3>
                 </div>
                 <div class="card-body" style="display:flex;flex-direction:column;gap:.75rem;">
-                    <a href="{{ route('venues.create') }}" class="btn btn-outline w-full justify-between"><span><i class="fas fa-plus-circle"></i> List New Venue</span> <i class="fas fa-arrow-right"></i></a>
-                    <a href="{{ route('events.create') }}" class="btn btn-outline w-full justify-between"><span><i class="fas fa-calendar-plus"></i> Create Event</span> <i class="fas fa-arrow-right"></i></a>
-                    <a href="{{ route('venues.index') }}" class="btn btn-secondary w-full justify-between"><span><i class="fas fa-search"></i> Find Venues</span> <i class="fas fa-arrow-right"></i></a>
+                    <a href="{{ route('venues.create') }}" class="btn btn-outline w-full justify-between w-full sm:w-auto"><span><i class="fas fa-plus-circle"></i> List New Venue</span> <i class="fas fa-arrow-right"></i></a>
+                    <a href="{{ route('events.create') }}" class="btn btn-outline w-full justify-between w-full sm:w-auto"><span><i class="fas fa-calendar-plus"></i> Create Event</span> <i class="fas fa-arrow-right"></i></a>
+                    <a href="{{ route('venues.index') }}" class="btn btn-secondary w-full justify-between w-full sm:w-auto"><span><i class="fas fa-search"></i> Find Venues</span> <i class="fas fa-arrow-right"></i></a>
                     @if(!auth()->user()->google_token)
                         <div class="alert alert-warning mb-0 mt-2 p-3">
                             <div><strong>Connect Calendar</strong><br>Connect Google to auto-sync bookings to your calendar.</div>

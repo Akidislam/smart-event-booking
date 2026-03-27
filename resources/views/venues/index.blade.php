@@ -23,13 +23,13 @@
 
 @section('content')
 <div class="page-header py-5 mb-4 text-center">
-    <div class="container">
+    <div class="container mx-auto px-4">
         <h1>Discover Premium <span class="text-gradient">Venues</span></h1>
         <p>Find the perfect location for your next big event from our curated collection.</p>
     </div>
 </div>
 
-<div class="container mb-5">
+<div class="container mx-auto px-4 mb-5">
     <div class="venue-grid">
         <!-- Main Listing -->
         <div id="venues-listing-container">
@@ -103,8 +103,8 @@
             </div>
 
             <div class="d-flex gap-2 mt-4 pt-3 border-top">
-                <button type="button" class="btn btn-secondary w-full justify-center" onclick="resetFilters()">Reset</button>
-                <button type="submit" class="btn btn-primary w-full justify-center">Apply Filters</button>
+                <button type="button" class="btn btn-secondary w-full justify-center w-full sm:w-auto" onclick="resetFilters()">Reset</button>
+                <button type="submit" class="btn btn-primary w-full justify-center w-full sm:w-auto">Apply Filters</button>
             </div>
         </form>
     </div>

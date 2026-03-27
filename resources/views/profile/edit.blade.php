@@ -57,9 +57,9 @@
 @section('content')
 
 <div class="page-header pb-4 mb-0" style="padding-top:2.5rem;">
-    <div class="container">
+    <div class="container mx-auto px-4">
         <div class="d-flex align-center gap-2">
-            <a href="{{ route('profile.index') }}" class="btn btn-secondary btn-sm">
+            <a href="{{ route('profile.index') }}" class="btn btn-secondary w-full sm:w-auto">
                 <i class="fas fa-arrow-left"></i> Back
             </a>
             <div>
@@ -70,12 +70,12 @@
     </div>
 </div>
 
-<div class="container" style="padding-top:2rem;">
+<div class="container mx-auto px-4" style="padding-top:2rem;">
     <div class="edit-wrap">
 
         {{-- Avatar Preview --}}
         <div class="avatar-preview-wrap">
-            <img class="avatar-preview" src="{{ $user->avatar_url }}" alt="{{ $user->name }}" id="avatarPreview">
+            <img class="avatar-preview w-full h-auto object-cover w-full h-auto object-cover" src="{{ $user->avatar_url }}" alt="{{ $user->name }}" id="avatarPreview">
             <div class="avatar-info">
                 <div style="font-weight:600;margin-bottom:.3rem;">{{ $user->name }}</div>
                 @if($user->google_id)
@@ -187,10 +187,10 @@
 
             {{-- Actions --}}
             <div class="d-flex gap-2" style="justify-content:flex-end;flex-wrap:wrap;">
-                <a href="{{ route('profile.index') }}" class="btn btn-secondary">
+                <a href="{{ route('profile.index') }}" class="btn btn-secondary w-full sm:w-auto">
                     <i class="fas fa-xmark"></i> Cancel
                 </a>
-                <button type="submit" class="btn btn-primary btn-lg" id="saveBtn">
+                <button type="submit" class="btn btn-primary btn-lg w-full sm:w-auto" id="saveBtn">
                     <i class="fas fa-floppy-disk"></i> Save Changes
                 </button>
             </div>

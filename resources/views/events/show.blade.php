@@ -38,7 +38,7 @@
 @endpush
 
 @section('content')
-<div class="container pb-5">
+<div class="container mx-auto px-4 pb-5">
 
     <div class="event-hero">
         <div class="event-hero-overlay">
@@ -53,7 +53,7 @@
                     <h1 style="font-family:'Plus Jakarta Sans',sans-serif; font-size:3rem; font-weight:900; line-height:1.1; margin-bottom:1rem; text-shadow:0 4px 10px rgba(0,0,0,0.5);">{{ $event->title }}</h1>
                     <div class="d-flex align-center gap-3">
                         <div class="d-flex align-center gap-2">
-                            <img src="{{ $event->user->avatar_url }}" style="width:36px;height:36px;border-radius:50%;" alt="">
+                            <img class="w-full h-auto object-cover w-full h-auto object-cover" src="{{ $event->user->avatar_url }}" style="width:36px;height:36px;border-radius:50%;" alt="">
                             <span>By <strong class="fw-bold">{{ $event->user->name }}</strong></span>
                         </div>
                         <span>&bull;</span>
@@ -63,11 +63,11 @@
                 
                 <div class="d-flex gap-2 align-center">
                     @can('update', $event)
-                        <a href="{{ route('events.edit', $event) }}" class="btn btn-secondary" style="background:rgba(255,255,255,0.1); backdrop-filter:blur(4px);"><i class="fas fa-pen"></i> Edit</a>
+                        <a href="{{ route('events.edit', $event) }}" class="btn btn-secondary w-full sm:w-auto" style="background:rgba(255,255,255,0.1); backdrop-filter:blur(4px);"><i class="fas fa-pen"></i> Edit</a>
                         <form action="{{ route('events.destroy', $event) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this event?');" style="margin:0;">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-outline" style="border-color:var(--danger); color:#fff; background:var(--danger);"><i class="fas fa-trash"></i> Delete</button>
+                            <button type="submit" class="btn btn-outline w-full sm:w-auto" style="border-color:var(--danger); color:#fff; background:var(--danger);"><i class="fas fa-trash"></i> Delete</button>
                         </form>
                     @endcan
                 </div>
@@ -97,7 +97,7 @@
                         @if($event->venue)
                             <div class="info-detail" style="margin-bottom:.5rem;">{{ $event->venue->name }}</div>
                             <div class="text-muted fs-sm">{{ $event->venue->address }}, {{ $event->venue->city }}</div>
-                            <a href="{{ route('venues.show', $event->venue) }}" class="btn btn-outline btn-sm mt-2"><i class="fas fa-external-link-alt"></i> View Venue</a>
+                            <a href="{{ route('venues.show', $event->venue) }}" class="btn btn-outline btn-sm mt-2 w-full sm:w-auto"><i class="fas fa-external-link-alt"></i> View Venue</a>
                         @else
                             <div class="info-detail">TBA / Online</div>
                         @endif
@@ -163,10 +163,10 @@
                         @endif
 
                         @auth
-                            <button type="submit" class="btn btn-primary btn-lg w-full justify-center shadow-lg"><i class="fas fa-check-circle"></i> Confirm Booking</button>
+                            <button type="submit" class="btn btn-primary btn-lg w-full justify-center shadow-lg w-full sm:w-auto"><i class="fas fa-check-circle"></i> Confirm Booking</button>
                             <div class="text-center text-muted fs-sm mt-3"><i class="fab fa-google"></i> Calendar sync enabled</div>
                         @else
-                            <a href="{{ route('login') }}" class="btn btn-secondary w-full justify-center">Sign In to Book</a>
+                            <a href="{{ route('login') }}" class="btn btn-secondary w-full justify-center w-full sm:w-auto">Sign In to Book</a>
                         @endauth
                     </form>
                 @endif

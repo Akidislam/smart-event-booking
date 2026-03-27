@@ -130,14 +130,14 @@
 <section class="hero">
     <div class="hero-orb orb-1"></div>
     <div class="hero-orb orb-2"></div>
-    <div class="container">
+    <div class="container mx-auto px-4">
         <div class="hero-content">
             <div class="hero-badge"><i class="fas fa-star"></i> Bangladesh's #1 Event Booking Platform</div>
             <h1>Find Your <span class="text-gradient">Perfect Venue</span> for Every Event</h1>
             <p>Discover premium venues, create events, and manage bookings seamlessly — all powered by Google Maps and Calendar integration.</p>
             <div class="hero-actions">
-                <a href="{{ route('venues.index') }}" class="btn btn-primary btn-lg"><i class="fas fa-search"></i> Explore Venues</a>
-                <a href="{{ route('events.index') }}" class="btn btn-secondary btn-lg"><i class="fas fa-calendar-days"></i> Browse Events</a>
+                <a href="{{ route('venues.index') }}" class="btn btn-primary btn-lg w-full sm:w-auto"><i class="fas fa-search"></i> Explore Venues</a>
+                <a href="{{ route('events.index') }}" class="btn btn-secondary btn-lg w-full sm:w-auto"><i class="fas fa-calendar-days"></i> Browse Events</a>
             </div>
             <div class="hero-stats">
                 <div>
@@ -163,7 +163,7 @@
 
 <!-- QUICK SEARCH -->
 <section class="search-section">
-    <div class="container">
+    <div class="container mx-auto px-4">
         <form action="{{ route('venues.index') }}" method="GET" class="search-card">
             <div class="search-field">
                 <label><i class="fas fa-location-dot"></i> City / Location</label>
@@ -182,24 +182,24 @@
                 <label><i class="fas fa-users"></i> Min. Capacity</label>
                 <input type="number" name="min_capacity" class="form-control" placeholder="e.g. 50" value="{{ request('min_capacity') }}">
             </div>
-            <button type="submit" class="btn btn-primary" style="height:46px;"><i class="fas fa-magnifying-glass"></i> Search</button>
+            <button type="submit" class="btn btn-primary w-full sm:w-auto" style="height:46px;"><i class="fas fa-magnifying-glass"></i> Search</button>
         </form>
     </div>
 </section>
 
 <!-- FEATURED VENUES -->
 <section class="section" style="padding-top:0">
-    <div class="container">
+    <div class="container mx-auto px-4">
         <div class="section-header">
             <span class="eyebrow">Top Picks</span>
             <h2>Featured <span class="text-gradient">Venues</span></h2>
             <p>Handpicked premium spaces for weddings, conferences, concerts, and everything in between.</p>
         </div>
-        <div class="grid-3">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             @forelse($featuredVenues as $venue)
             <div class="venue-card" onclick="location.href='{{ route('venues.show', $venue) }}'">
                 <div class="venue-card-img">
-                    <img src="{{ $venue->first_image }}" alt="{{ $venue->name }}" loading="lazy">
+                    <img class="w-full h-auto object-cover" src="{{ $venue->first_image }}" alt="{{ $venue->name }}" loading="lazy">
                     <div class="venue-card-cat"><span class="badge badge-primary">{{ \App\Models\Venue::categories()[$venue->category] ?? $venue->category }}</span></div>
                     <div class="venue-card-price">{{ $venue->price_formatted }}/hr</div>
                 </div>
@@ -220,20 +220,20 @@
             @endforelse
         </div>
         <div class="text-center mt-4">
-            <a href="{{ route('venues.index') }}" class="btn btn-secondary"><i class="fas fa-arrow-right"></i> View All Venues</a>
+            <a href="{{ route('venues.index') }}" class="btn btn-secondary w-full sm:w-auto"><i class="fas fa-arrow-right"></i> View All Venues</a>
         </div>
     </div>
 </section>
 
 <!-- HOW IT WORKS -->
 <section class="section" style="background:linear-gradient(160deg,rgba(99,102,241,0.05) 0%,transparent 60%);">
-    <div class="container">
+    <div class="container mx-auto px-4">
         <div class="section-header">
             <span class="eyebrow">Simple Process</span>
             <h2>How It <span class="text-gradient">Works</span></h2>
             <p>Book your perfect venue in four simple steps.</p>
         </div>
-        <div class="grid-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             <div class="how-step">
                 <div class="step-icon"><i class="fas fa-magnifying-glass"></i></div>
                 <div class="step-num">Step 01</div>
@@ -264,13 +264,13 @@
 
 <!-- UPCOMING EVENTS -->
 <section class="section">
-    <div class="container">
+    <div class="container mx-auto px-4">
         <div class="section-header">
             <span class="eyebrow">What's On</span>
             <h2>Upcoming <span class="text-gradient">Events</span></h2>
             <p>Discover and attend amazing events happening near you.</p>
         </div>
-        <div class="grid-3">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             @forelse($upcomingEvents as $event)
             <div class="event-card" onclick="location.href='{{ route('events.show', $event) }}'">
                 <div class="event-date-col">
@@ -300,24 +300,24 @@
             @endforelse
         </div>
         <div class="text-center mt-4">
-            <a href="{{ route('events.index') }}" class="btn btn-secondary"><i class="fas fa-arrow-right"></i> View All Events</a>
+            <a href="{{ route('events.index') }}" class="btn btn-secondary w-full sm:w-auto"><i class="fas fa-arrow-right"></i> View All Events</a>
         </div>
     </div>
 </section>
 
 <!-- CTA BANNER -->
 <section class="section-sm">
-    <div class="container">
+    <div class="container mx-auto px-4">
         <div class="cta-banner">
             <h2>Ready to List Your <span class="text-gradient">Venue?</span></h2>
             <p>Join hundreds of venue owners and start earning by hosting amazing events.</p>
             <div class="d-flex gap-2 justify-center" style="flex-wrap:wrap;">
                 @auth
-                    <a href="{{ route('venues.create') }}" class="btn btn-primary btn-lg"><i class="fas fa-plus"></i> List Your Venue</a>
-                    <a href="{{ route('events.create') }}" class="btn btn-secondary btn-lg"><i class="fas fa-calendar-plus"></i> Create an Event</a>
+                    <a href="{{ route('venues.create') }}" class="btn btn-primary btn-lg w-full sm:w-auto"><i class="fas fa-plus"></i> List Your Venue</a>
+                    <a href="{{ route('events.create') }}" class="btn btn-secondary btn-lg w-full sm:w-auto"><i class="fas fa-calendar-plus"></i> Create an Event</a>
                 @else
-                    <a href="{{ route('auth.google') }}" class="btn btn-primary btn-lg"><i class="fab fa-google"></i> Get Started with Google</a>
-                    <a href="{{ route('register') }}" class="btn btn-secondary btn-lg"><i class="fas fa-user-plus"></i> Create Free Account</a>
+                    <a href="{{ route('auth.google') }}" class="btn btn-primary btn-lg w-full sm:w-auto"><i class="fab fa-google"></i> Get Started with Google</a>
+                    <a href="{{ route('register') }}" class="btn btn-secondary btn-lg w-full sm:w-auto"><i class="fas fa-user-plus"></i> Create Free Account</a>
                 @endauth
             </div>
         </div>

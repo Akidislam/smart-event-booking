@@ -4,16 +4,16 @@
 
 @section('content')
 <div class="page-header py-4 mb-4" style="background:var(--bg-card); border-bottom:1px solid var(--border-strong);">
-    <div class="container d-flex justify-between align-center">
+    <div class="container mx-auto px-4 d-flex justify-between align-center">
         <div>
             <h1 style="color:var(--warning); margin-bottom:.25rem;"><i class="fas fa-calendar-alt text-primary-light"></i> Platform Events</h1>
             <p class="text-muted m-0">Oversee all events created across the platform.</p>
         </div>
-        <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Back</a>
+        <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary w-full sm:w-auto"><i class="fas fa-arrow-left"></i> Back</a>
     </div>
 </div>
 
-<div class="container mb-5">
+<div class="container mx-auto px-4 mb-5">
     
     <div class="card p-0">
         <div class="table-wrap">
@@ -36,7 +36,7 @@
                         </td>
                         <td>
                             <div class="d-flex align-center gap-2">
-                                <img src="{{ $e->user->avatar_url }}" style="width:24px; height:24px; border-radius:50%;" alt="">
+                                <img class="w-full h-auto object-cover w-full h-auto object-cover" src="{{ $e->user->avatar_url }}" style="width:24px; height:24px; border-radius:50%;" alt="">
                                 <div class="fw-bold fs-sm">{{ $e->user->name ?? 'Unknown' }}</div>
                             </div>
                         </td>
@@ -54,11 +54,11 @@
                         </td>
                         <td style="text-align:right; padding-right:1.5rem; vertical-align:middle;">
                             <div class="d-flex justify-between gap-1" style="justify-content:flex-end;">
-                                <a href="{{ route('events.show', $e) }}" target="_blank" class="btn btn-outline btn-sm" title="View Public Page"><i class="fas fa-eye"></i></a>
+                                <a href="{{ route('events.show', $e) }}" target="_blank" class="btn btn-outline btn-sm w-full sm:w-auto" title="View Public Page"><i class="fas fa-eye"></i></a>
                                 
                                 <form action="{{ route('events.destroy', $e) }}" method="POST" onsubmit="return confirm('As an admin, are you sure you want to delete this user event?');">
                                     @csrf @method('DELETE')
-                                    <button class="btn btn-outline btn-sm border-danger text-danger" title="Force Delete Event"><i class="fas fa-trash"></i></button>
+                                    <button class="btn btn-outline btn-sm border-danger text-danger w-full sm:w-auto" title="Force Delete Event"><i class="fas fa-trash"></i></button>
                                 </form>
                             </div>
                         </td>

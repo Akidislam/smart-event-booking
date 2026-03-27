@@ -4,13 +4,13 @@
 
 @section('content')
 <div class="page-header py-5 mb-4 text-center">
-    <div class="container">
+    <div class="container mx-auto px-4">
         <h1>Discover Upcoming <span class="text-gradient">Events</span></h1>
         <p>From tech conferences to local concerts, find what's happening near you.</p>
     </div>
 </div>
 
-<div class="container mb-5">
+<div class="container mx-auto px-4 mb-5">
     <div class="d-flex justify-between align-center mb-4" style="flex-wrap:wrap; gap:1rem;">
         <h3 class="fw-bold m-0" style="font-size:1.5rem">Latest Events</h3>
         
@@ -26,18 +26,18 @@
                 <i class="fas fa-search"></i>
                 <input type="text" name="search" class="form-control pl-4" placeholder="Search events..." value="{{ request('search') }}" style="min-width:250px;">
             </div>
-            <button type="submit" class="btn btn-secondary"><i class="fas fa-filter"></i> Search</button>
+            <button type="submit" class="btn btn-secondary w-full sm:w-auto"><i class="fas fa-filter"></i> Search</button>
         </form>
     </div>
 
     <!-- Event Grid -->
-    <div class="grid-3">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         @forelse($events as $event)
         <div class="card event-card" style="display:flex; flex-direction:column; height:100%;">
             <!-- Image Header for Events page -->
             <div style="width:100%; height:180px; position:relative;">
                 <a href="{{ route('events.show', $event) }}">
-                    <img src="{{ $event->banner_image ? asset('storage/'.$event->banner_image) : 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800' }}" alt="{{ $event->title }}" style="width:100%; height:100%; object-fit:cover;">
+                    <img class="w-full h-auto object-cover" src="{{ $event->banner_image ? asset('storage/'.$event->banner_image) : 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800' }}" alt="{{ $event->title }}" style="width:100%; height:100%; object-fit:cover;">
                 </a>
                 <div style="position:absolute; top:1rem; left:1rem;" class="d-flex gap-1">
                     <span class="badge badge-primary">{{ \App\Models\Event::categories()[$event->category] ?? $event->category }}</span>
@@ -66,15 +66,15 @@
                     <div class="d-flex justify-between align-center mt-auto pt-3 border-top" style="border-top:1px solid var(--border-strong);">
                         <div class="d-flex gap-2">
                             @can('update', $event)
-                                <a href="{{ route('events.edit', $event) }}" class="btn btn-outline btn-sm" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">Edit</a>
+                                <a href="{{ route('events.edit', $event) }}" class="btn btn-outline btn-sm w-full sm:w-auto" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">Edit</a>
                                 <form action="{{ route('events.destroy', $event) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this event?');" style="display:inline-block; margin:0;">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-outline btn-sm text-danger" style="padding: 0.25rem 0.5rem; font-size: 0.8rem; border-color: var(--danger, #dc3545);">Delete</button>
+                                    <button type="submit" class="btn btn-outline btn-sm text-danger w-full sm:w-auto" style="padding: 0.25rem 0.5rem; font-size: 0.8rem; border-color: var(--danger, #dc3545);">Delete</button>
                                 </form>
                             @endcan
                         </div>
-                        <a href="{{ route('events.show', $event) }}" class="btn btn-primary btn-sm" style="padding: 0.25rem 0.75rem; font-size: 0.8rem;">Book / View</a>
+                        <a href="{{ route('events.show', $event) }}" class="btn btn-primary btn-sm w-full sm:w-auto" style="padding: 0.25rem 0.75rem; font-size: 0.8rem;">Book / View</a>
                     </div>
                 </div>
             </div>
@@ -84,7 +84,7 @@
             <i class="fas fa-calendar-xmark" style="font-size:3rem; color:var(--text-muted); opacity:0.3; margin-bottom:1rem; display:block;"></i>
             <h3 class="mb-2">No events found</h3>
             <p class="text-muted mb-4">Check back later or try adjusting your filters.</p>
-            <a href="{{ route('events.index') }}" class="btn btn-primary">Clear Filters</a>
+            <a href="{{ route('events.index') }}" class="btn btn-primary w-full sm:w-auto">Clear Filters</a>
         </div>
         @endforelse
     </div>

@@ -4,13 +4,13 @@
 
 @section('content')
 <div class="page-header pb-4 mb-4 text-center">
-    <div class="container-sm">
+    <div class="container mx-auto px-4 max-w-3xl">
         <h1>List Your <span class="text-gradient">Venue</span></h1>
         <p>Start earning by hosting events. Fill out the details below to add your venue to the platform.</p>
     </div>
 </div>
 
-<div class="container-sm pb-5">
+<div class="container mx-auto px-4-sm pb-5">
     <div class="card p-4">
         <form action="{{ route('venues.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
@@ -23,7 +23,7 @@
                 @error('name')<span class="text-danger fs-sm">{{ $message }}</span>@enderror
             </div>
 
-            <div class="grid-2 gap-3 mb-1">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 gap-3 mb-1">
                 <div class="form-group">
                     <label class="form-label">Category <span class="text-danger">*</span></label>
                     <select name="category" class="form-control" required>
@@ -58,7 +58,7 @@
                 <input type="text" name="address" class="form-control" value="{{ old('address') }}" required placeholder="e.g. 123 Main St, Block B">
             </div>
 
-            <div class="grid-2 gap-3 mb-5">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 gap-3 mb-5">
                 <div class="form-group">
                     <label class="form-label">City <span class="text-danger">*</span></label>
                     <input type="text" name="city" class="form-control" value="{{ old('city') }}" required placeholder="e.g. Dhaka">
@@ -78,7 +78,7 @@
             <div class="mb-4">
                 <label class="form-label">Current Image</label>
                 <div style="max-width:300px; border-radius:var(--radius); overflow:hidden; border:1px solid var(--border);">
-                    <img src="{{ asset('storage/' . $venue->image) }}" alt="Venue Image" style="width:100%; height:auto; display:block;">
+                    <img class="w-full h-auto object-cover w-full h-auto object-cover" src="{{ asset('storage/' . $venue->image) }}" alt="Venue Image" style="width:100%; height:auto; display:block;">
                 </div>
             </div>
             @endif
@@ -94,8 +94,8 @@
             </div>
 
             <div class="d-flex justify-between border-top pt-4" style="border-top:1px solid var(--border)">
-                <a href="{{ route('dashboard') }}" class="btn btn-secondary">Cancel</a>
-                <button type="submit" class="btn btn-primary btn-lg"><i class="fas fa-check-circle"></i> Publish Venue Listings</button>
+                <a href="{{ route('dashboard') }}" class="btn btn-secondary w-full sm:w-auto">Cancel</a>
+                <button type="submit" class="btn btn-primary btn-lg w-full sm:w-auto"><i class="fas fa-check-circle"></i> Publish Venue Listings</button>
             </div>
         </form>
     </div>

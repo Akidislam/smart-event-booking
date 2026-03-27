@@ -32,7 +32,7 @@
 @endpush
 
 @section('content')
-<div class="auth-container">
+<div class="auth-container mx-auto px-4">
     <div class="auth-card">
         <div class="auth-header">
             <h1>Welcome Back</h1>
@@ -80,7 +80,7 @@
                 <label for="remember" style="font-size:.875rem;cursor:pointer;color:var(--text-muted);">Remember me</label>
             </div>
 
-            <button type="submit" class="btn btn-primary btn-lg w-full justify-center">Sign In</button>
+            <button type="submit" class="btn btn-primary btn-lg w-full justify-center w-full sm:w-auto">Sign In</button>
         </form>
 
         <div class="text-center mt-4" style="color:var(--text-muted);font-size:.9rem;">

@@ -4,13 +4,13 @@
 
 @section('content')
 <div class="page-header pb-4 mb-4 text-center">
-    <div class="container-sm">
+    <div class="container mx-auto px-4 max-w-3xl">
         <h1>Create an <span class="text-gradient">Event</span></h1>
         <p>Host an upcoming event, concert, or conference and manage ticketing effortlessly.</p>
     </div>
 </div>
 
-<div class="container-sm pb-5">
+<div class="container mx-auto px-4-sm pb-5">
     <div class="card p-4">
         <form action="{{ route('events.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
@@ -23,7 +23,7 @@
                 @error('title')<span class="text-danger fs-sm">{{ $message }}</span>@enderror
             </div>
 
-            <div class="grid-2 gap-3 mb-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 gap-3 mb-4">
                 <div class="form-group">
                     <label class="form-label">Category <span class="text-danger">*</span></label>
                     <select name="category" class="form-control" required>
@@ -55,7 +55,7 @@
 
             <h3 class="fw-bold mb-3 pb-2 border-bottom" style="border-bottom:1px solid var(--border)">Schedule & Ticketing</h3>
 
-            <div class="grid-2 gap-3 mb-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 gap-3 mb-4">
                 <div class="form-group">
                     <label class="form-label">Start Date & Time <span class="text-danger">*</span></label>
                     <input type="datetime-local" name="start_datetime" class="form-control" value="{{ old('start_datetime') }}" required min="{{ date('Y-m-d\TH:i') }}">
@@ -68,7 +68,7 @@
                 </div>
             </div>
 
-            <div class="grid-3 gap-3 mb-4 align-center">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 gap-3 mb-4 align-center">
                 <div class="form-group mb-0">
                     <label class="form-label">Max Attendees</label>
                     <input type="number" name="max_attendees" class="form-control" value="{{ old('max_attendees') }}" min="1" placeholder="Leave empty for unlimited">
@@ -97,8 +97,8 @@
             </div>
 
             <div class="d-flex justify-between border-top pt-4" style="border-top:1px solid var(--border)">
-                <a href="{{ route('dashboard') }}" class="btn btn-secondary">Cancel</a>
-                <button type="submit" class="btn btn-primary btn-lg"><i class="far fa-calendar-check"></i> Publish Event</button>
+                <a href="{{ route('dashboard') }}" class="btn btn-secondary w-full sm:w-auto">Cancel</a>
+                <button type="submit" class="btn btn-primary btn-lg w-full sm:w-auto"><i class="far fa-calendar-check"></i> Publish Event</button>
             </div>
             <div class="text-center w-full mt-3">
                 <small class="text-muted"><i class="fab fa-google"></i> This event will automatically be created on your Google Calendar.</small>

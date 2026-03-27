@@ -4,16 +4,16 @@
 
 @section('content')
 <div class="page-header py-4 mb-4" style="background:var(--bg-card); border-bottom:1px solid var(--border-strong);">
-    <div class="container d-flex justify-between align-center">
+    <div class="container mx-auto px-4 d-flex justify-between align-center">
         <div>
             <h1 style="color:var(--warning); margin-bottom:.25rem;"><i class="fas fa-building text-success"></i> Venue Approvals</h1>
             <p class="text-muted m-0">Review pending venue listings and manage platform inventory.</p>
         </div>
-        <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
+        <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary w-full sm:w-auto"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
     </div>
 </div>
 
-<div class="container mb-5">
+<div class="container mx-auto px-4 mb-5">
     
     <div class="d-flex justify-between align-center mb-4">
         <ul class="nav-links" style="background:var(--bg-card); padding:.25rem; border-radius:var(--radius); border:1px solid var(--border); width:max-content;">
@@ -42,7 +42,7 @@
                     <tr>
                         <td style="padding:1.5rem;">
                             <div class="d-flex align-center gap-3">
-                                <img src="{{ $v->first_image }}" style="width:60px; height:45px; border-radius:6px; object-fit:cover; border:1px solid var(--border);" alt="{{ $v->name }}">
+                                <img class="w-full h-auto object-cover w-full h-auto object-cover" src="{{ $v->first_image }}" style="width:60px; height:45px; border-radius:6px; object-fit:cover; border:1px solid var(--border);" alt="{{ $v->name }}">
                                 <div>
                                     <a href="{{ route('venues.show', $v) }}" target="_blank" class="fw-bold fs-sm text-primary" style="text-decoration:none;">{{ $v->name }}</a>
                                     <div class="text-muted" style="font-size:.7rem; margin-top:.25rem;"><i class="fas fa-tag"></i> {{ \App\Models\Venue::categories()[$v->category] ?? $v->category }}</div>
@@ -51,7 +51,7 @@
                         </td>
                         <td>
                             <div class="d-flex align-center gap-2">
-                                <img src="{{ $v->user->avatar_url }}" style="width:24px; height:24px; border-radius:50%;" alt="">
+                                <img class="w-full h-auto object-cover w-full h-auto object-cover" src="{{ $v->user->avatar_url }}" style="width:24px; height:24px; border-radius:50%;" alt="">
                                 <div>
                                     <div class="fw-bold fs-sm">{{ $v->user->name ?? 'Unknown' }}</div>
                                     <a href="mailto:{{ $v->user->email ?? '' }}" class="text-muted" style="font-size:.7rem; text-decoration:none;"><i class="fas fa-envelope"></i> Contact</a>
@@ -72,7 +72,7 @@
                         </td>
                         <td style="text-align:right; padding-right:1.5rem; vertical-align:middle;">
                             <div class="d-flex justify-between gap-1" style="justify-content:flex-end;">
-                                <a href="{{ route('venues.show', $v) }}" target="_blank" class="btn btn-outline btn-sm" title="Preview"><i class="fas fa-eye"></i></a>
+                                <a href="{{ route('venues.show', $v) }}" target="_blank" class="btn btn-outline btn-sm w-full sm:w-auto" title="Preview"><i class="fas fa-eye"></i></a>
                                 
                                 @if($v->status === 'pending')
                                     <form action="{{ route('admin.venues.approve', $v) }}" method="POST">@csrf <button class="btn btn-sm" style="background:var(--success); color:#fff;" title="Approve"><i class="fas fa-check"></i></button></form>
@@ -80,10 +80,10 @@
                                 @endif
                                 
                                 @if($v->status === 'active')
-                                    <form action="{{ route('admin.venues.reject', $v) }}" method="POST" onsubmit="return confirm('Suspend this venue?');">@csrf <button class="btn btn-outline btn-sm border-danger text-danger" title="Suspend"><i class="fas fa-ban"></i></button></form>
+                                    <form action="{{ route('admin.venues.reject', $v) }}" method="POST" onsubmit="return confirm('Suspend this venue?');">@csrf <button class="btn btn-outline btn-sm border-danger text-danger w-full sm:w-auto" title="Suspend"><i class="fas fa-ban"></i></button></form>
                                 @endif
                                 
-                                <form action="{{ route('venues.destroy', $v) }}" method="POST" onsubmit="return confirm('Irreversibly delete this venue?');">@csrf @method('DELETE') <button class="btn btn-outline btn-sm" style="color:var(--text-muted); border-color:transparent;" title="Delete forever"><i class="fas fa-trash"></i></button></form>
+                                <form action="{{ route('venues.destroy', $v) }}" method="POST" onsubmit="return confirm('Irreversibly delete this venue?');">@csrf @method('DELETE') <button class="btn btn-outline btn-sm w-full sm:w-auto" style="color:var(--text-muted); border-color:transparent;" title="Delete forever"><i class="fas fa-trash"></i></button></form>
                             </div>
                         </td>
                     </tr>

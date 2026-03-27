@@ -71,7 +71,7 @@
 
 @section('content')
 <div class="page-header pb-4 mb-0">
-    <div class="container">
+    <div class="container mx-auto px-4">
         <div class="d-flex justify-between align-center" style="flex-wrap:wrap;gap:1rem;">
             <div>
                 <h1><i class="fas fa-headset" style="color:var(--primary-light);font-size:2rem;"></i>
@@ -92,7 +92,7 @@
     </div>
 </div>
 
-<div class="container" style="padding-top:2rem;padding-bottom:4rem;">
+<div class="container mx-auto px-4" style="padding-top:2rem;padding-bottom:4rem;">
 
     <!-- Filter bar -->
     <form method="GET" class="filter-bar">
@@ -101,9 +101,9 @@
             <option value="pending"  {{ request('status') === 'pending'  ? 'selected' : '' }}>Pending</option>
             <option value="replied"  {{ request('status') === 'replied'  ? 'selected' : '' }}>Replied</option>
         </select>
-        <button type="submit" class="btn btn-secondary btn-sm"><i class="fas fa-filter"></i> Filter</button>
+        <button type="submit" class="btn btn-secondary w-full sm:w-auto"><i class="fas fa-filter"></i> Filter</button>
         @if(request('status'))
-            <a href="{{ route('admin.support.index') }}" class="btn btn-secondary btn-sm">
+            <a href="{{ route('admin.support.index') }}" class="btn btn-secondary w-full sm:w-auto">
                 <i class="fas fa-xmark"></i> Clear
             </a>
         @endif
@@ -117,7 +117,7 @@
 
         <!-- User info row -->
         <div class="user-info">
-            <img src="{{ $msg->user->avatar_url }}" alt="{{ $msg->user->name }}">
+            <img class="w-full h-auto object-cover w-full h-auto object-cover" src="{{ $msg->user->avatar_url }}" alt="{{ $msg->user->name }}">
             <div>
                 <div class="user-name">{{ $msg->user->name }}</div>
                 <div class="user-email">{{ $msg->user->email }}</div>

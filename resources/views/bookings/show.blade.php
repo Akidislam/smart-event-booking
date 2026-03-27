@@ -4,19 +4,19 @@
 
 @section('content')
 <div class="page-header py-4 mb-4" style="background:var(--bg-card); border-bottom:1px dashed var(--border-strong);">
-    <div class="container d-flex justify-between align-center">
+    <div class="container mx-auto px-4 d-flex justify-between align-center">
         <div>
             <h1 style="color:var(--text); margin-bottom:.25rem;"><i class="fas fa-ticket-alt text-primary"></i> Booking Confirmation</h1>
             <p class="text-muted m-0">Reference: <strong class="text-white">{{ $booking->booking_reference }}</strong></p>
         </div>
         <div class="d-flex gap-2">
-            <a href="{{ route('bookings.index') }}" class="btn btn-secondary"><i class="fas fa-list"></i> All Bookings</a>
-            <button class="btn btn-primary" onclick="window.print()"><i class="fas fa-print"></i> Print Invoice</button>
+            <a href="{{ route('bookings.index') }}" class="btn btn-secondary w-full sm:w-auto"><i class="fas fa-list"></i> All Bookings</a>
+            <button class="btn btn-primary w-full sm:w-auto" onclick="window.print()"><i class="fas fa-print"></i> Print Invoice</button>
         </div>
     </div>
 </div>
 
-<div class="container mb-5" style="max-width:860px;">
+<div class="container mx-auto px-4 mb-5" style="max-width:860px;">
     
     @if($booking->status === 'confirmed')
         <div class="alert alert-success mb-5" style="align-items:center; padding:1.5rem;">
@@ -56,7 +56,7 @@
 
         <!-- Body -->
         <div style="padding:2.5rem; background:var(--bg-surface);">
-            <div class="grid-2 gap-4 mb-5">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 gap-4 mb-5">
                 <div>
                     <h5 class="text-muted text-uppercase mb-2 fs-sm fw-bold border-bottom pb-2">Schedule Details</h5>
                     <div class="mb-3">

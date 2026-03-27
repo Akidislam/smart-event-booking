@@ -4,16 +4,16 @@
 
 @section('content')
 <div class="page-header py-4 mb-4">
-    <div class="container d-flex justify-between align-center">
+    <div class="container mx-auto px-4 d-flex justify-between align-center">
         <div>
             <h1>My Bookings</h1>
             <p>Manage your upcoming and past event and venue reservations.</p>
         </div>
-        <a href="{{ route('dashboard') }}" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
+        <a href="{{ route('dashboard') }}" class="btn btn-secondary w-full sm:w-auto"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
     </div>
 </div>
 
-<div class="container mb-5">
+<div class="container mx-auto px-4 mb-5">
     <div class="card p-0 mb-5">
         <div class="table-wrap">
             <table>
@@ -82,10 +82,10 @@
                                 @if(!in_array($booking->status, ['cancelled', 'completed']) && $booking->start_datetime > now())
                                     <form action="{{ route('bookings.cancel', $booking) }}" method="POST" onsubmit="return confirm('Are you sure you want to cancel this booking? This action cannot be undone.');">
                                         @csrf
-                                        <button type="submit" class="btn btn-outline btn-sm" style="color:var(--danger); border-color:var(--danger);"><i class="fas fa-times"></i> Cancel</button>
+                                        <button type="submit" class="btn btn-outline btn-sm w-full sm:w-auto" style="color:var(--danger); border-color:var(--danger);"><i class="fas fa-times"></i> Cancel</button>
                                     </form>
                                 @endif
-                                <button class="btn btn-secondary btn-sm" title="Download Ticket PDF (Coming Soon)"><i class="fas fa-download"></i></button>
+                                <button class="btn btn-secondary w-full sm:w-auto" title="Download Ticket PDF (Coming Soon)"><i class="fas fa-download"></i></button>
                             </div>
                         </td>
                     </tr>
@@ -96,8 +96,8 @@
                             <h3 class="mb-2">No bookings found</h3>
                             <p class="text-muted mb-4">You haven't made any reservations yet.</p>
                             <div class="d-flex gap-2 justify-center">
-                                <a href="{{ route('venues.index') }}" class="btn btn-primary"><i class="fas fa-building"></i> Browse Venues</a>
-                                <a href="{{ route('events.index') }}" class="btn btn-secondary"><i class="fas fa-calendar"></i> Find Events</a>
+                                <a href="{{ route('venues.index') }}" class="btn btn-primary w-full sm:w-auto"><i class="fas fa-building"></i> Browse Venues</a>
+                                <a href="{{ route('events.index') }}" class="btn btn-secondary w-full sm:w-auto"><i class="fas fa-calendar"></i> Find Events</a>
                             </div>
                         </td>
                     </tr>

@@ -4,16 +4,16 @@
 
 @section('content')
 <div class="page-header py-4 mb-4" style="background:var(--bg-card); border-bottom:1px solid var(--border-strong);">
-    <div class="container d-flex justify-between align-center">
+    <div class="container mx-auto px-4 d-flex justify-between align-center">
         <div>
             <h1 style="color:var(--warning); margin-bottom:.25rem;"><i class="fas fa-money-bill-transfer text-success"></i> Central Booking Ledger</h1>
             <p class="text-muted m-0">Monitor all transactions, bookings, and reservations System-wide.</p>
         </div>
-        <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Back</a>
+        <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary w-full sm:w-auto"><i class="fas fa-arrow-left"></i> Back</a>
     </div>
 </div>
 
-<div class="container mb-5">
+<div class="container mx-auto px-4 mb-5">
     
     <div class="card p-0">
         <div class="table-wrap">
@@ -33,7 +33,7 @@
                         <td style="padding:1.5rem;">
                             <a href="{{ route('bookings.show', $b) }}" target="_blank" class="fw-bold d-block mb-1" style="font-family:monospace;letter-spacing:1px;">{{ $b->booking_reference }}</a>
                             <div class="d-flex align-center gap-2 mt-2">
-                                <img src="{{ $b->user->avatar_url }}" style="width:20px; height:20px; border-radius:50%;" alt="">
+                                <img class="w-full h-auto object-cover w-full h-auto object-cover" src="{{ $b->user->avatar_url }}" style="width:20px; height:20px; border-radius:50%;" alt="">
                                 <span class="fs-sm text-muted">{{ $b->user->name }}</span>
                             </div>
                         </td>

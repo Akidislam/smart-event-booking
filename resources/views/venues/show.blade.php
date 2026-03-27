@@ -34,7 +34,7 @@
 @endpush
 
 @section('content')
-<div class="container pb-5">
+<div class="container mx-auto px-4 pb-5">
     <div class="venue-header">
         <div>
             <div class="badge badge-primary mb-3">{{ \App\Models\Venue::categories()[$venue->category] ?? ucfirst($venue->category) }}</div>
@@ -46,16 +46,16 @@
         </div>
         <div class="d-flex gap-2">
             @can('update', $venue)
-                <a href="{{ route('venues.edit', $venue) }}" class="btn btn-secondary"><i class="fas fa-pen"></i> Edit Venue</a>
+                <a href="{{ route('venues.edit', $venue) }}" class="btn btn-secondary w-full sm:w-auto"><i class="fas fa-pen"></i> Edit Venue</a>
             @endcan
-            <button class="btn btn-secondary"><i class="fas fa-share-nodes"></i> Share</button>
-            <button class="btn btn-outline" style="border-radius:50%; width:44px; height:44px; padding:0; justify-content:center;"><i class="far fa-heart"></i></button>
+            <button class="btn btn-secondary w-full sm:w-auto"><i class="fas fa-share-nodes"></i> Share</button>
+            <button class="btn btn-outline w-full sm:w-auto" style="border-radius:50%; width:44px; height:44px; padding:0; justify-content:center;"><i class="far fa-heart"></i></button>
         </div>
     </div>
 
     <!-- Single Image banner -->
     <div class="gallery" style="display:block; height:400px; margin-bottom: 2rem;">
-        <img src="{{ $venue->image ? asset('storage/'.$venue->image) : 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200' }}" alt="Venue Image" style="width:100%; height:100%; object-fit:cover; border-radius: var(--radius-lg);">
+        <img class="w-full h-auto object-cover w-full h-auto object-cover" src="{{ $venue->image ? asset('storage/'.$venue->image) : 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200' }}" alt="Venue Image" style="width:100%; height:100%; object-fit:cover; border-radius: var(--radius-lg);">
     </div>
 
     <div class="content-grid">
@@ -88,7 +88,7 @@
             <div class="mb-5">
                 <h3 class="section-title">Location Map</h3>
                 <div class="text-muted"><i class="fas fa-map-pin"></i> {{ $venue->address }}, {{ $venue->city }}, {{ $venue->state }}</div>
-                <div class="map-container" id="map">
+                <div class="map-container mx-auto px-4" id="map">
                     <!-- Google Map will render here. For fallback, simple iframe -->
                     @if($venue->latitude && $venue->longitude)
                         @if(config('services.google.maps_api_key'))
@@ -129,20 +129,20 @@
                     </div>
                     
                     @auth
-                        <button type="submit" class="btn btn-primary btn-lg w-full justify-center shadow-lg"><i class="fas fa-calendar-check"></i> Book Venue Now</button>
+                        <button type="submit" class="btn btn-primary btn-lg w-full justify-center shadow-lg w-full sm:w-auto"><i class="fas fa-calendar-check"></i> Book Venue Now</button>
                         <p class="text-center text-muted mt-3" style="font-size:.8rem;"><i class="fab fa-google"></i> Auto-syncs to Google Calendar</p>
                     @else
-                        <a href="{{ route('login') }}" class="btn btn-primary btn-lg w-full justify-center">Log in to book</a>
+                        <a href="{{ route('login') }}" class="btn btn-primary btn-lg w-full justify-center w-full sm:w-auto">Log in to book</a>
                     @endauth
                 </form>
 
                 <div class="mt-4 pt-4 border-top text-center" style="border-top:1px dashed var(--border-strong);">
                     <p class="fs-sm text-muted mb-2">Hosted by</p>
                     <div class="d-flex align-center justify-center gap-2 mb-2">
-                        <img src="{{ $venue->user->avatar_url ?? 'https://ui-avatars.com/api/?name='.urlencode($venue->user->name) }}" style="width:40px;height:40px;border-radius:50%;" alt="">
+                        <img class="w-full h-auto object-cover w-full h-auto object-cover" src="{{ $venue->user->avatar_url ?? 'https://ui-avatars.com/api/?name='.urlencode($venue->user->name) }}" style="width:40px;height:40px;border-radius:50%;" alt="">
                         <div class="fw-bold">{{ $venue->user->name }}</div>
                     </div>
-                    <a href="#" class="btn btn-outline btn-sm w-full"><i class="fas fa-comment"></i> Contact Host</a>
+                    <a href="#" class="btn btn-outline btn-sm w-full w-full sm:w-auto"><i class="fas fa-comment"></i> Contact Host</a>
                 </div>
             </div>
         </div>

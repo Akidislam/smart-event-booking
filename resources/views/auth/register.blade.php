@@ -28,7 +28,7 @@
 @endpush
 
 @section('content')
-<div class="auth-container">
+<div class="auth-container mx-auto px-4">
     <div class="auth-card">
         <div class="auth-header">
             <h1>Create an Account</h1>
@@ -77,7 +77,7 @@
                 @error('phone')<span class="form-error">{{ $message }}</span>@enderror
             </div>
 
-            <div class="grid-2 gap-3 mb-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 gap-3 mb-4">
                 <div class="form-group mb-0">
                     <label class="form-label">Password</label>
                     <div class="input-icon">
@@ -97,7 +97,7 @@
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-primary btn-lg w-full justify-center">Create Account</button>
+            <button type="submit" class="btn btn-primary btn-lg w-full justify-center w-full sm:w-auto">Create Account</button>
         </form>
 
         <div class="text-center mt-4" style="color:var(--text-muted);font-size:.9rem;">

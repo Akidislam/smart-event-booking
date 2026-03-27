@@ -336,8 +336,16 @@
         }
     </style>
     @stack('styles')
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        corePlugins: {
+          preflight: false,
+        }
+      }
+    </script>
 </head>
-<body>
+<body class="overflow-x-hidden">
     <nav class="navbar">
         <a href="{{ route('home') }}" class="nav-brand">
             <div class="logo-icon"><i class="fas fa-calendar-star"></i></div>
@@ -366,7 +374,7 @@
         <div class="nav-actions">
             @auth
                 <div class="dropdown">
-                    <img src="{{ auth()->user()->avatar_url }}" alt="{{ auth()->user()->name }}" class="nav-avatar">
+                    <img src="{{ auth()->user()->avatar_url }}" alt="{{ auth()->user()->name }}" class="nav-avatar w-full h-auto object-cover">
                     <div class="dropdown-menu">
                         <div style="padding:.5rem .9rem .75rem; border-bottom:1px solid var(--border); margin-bottom:.25rem;">
                             <div style="font-weight:600;font-size:.9rem;">{{ auth()->user()->name }}</div>
@@ -430,7 +438,7 @@
     </main>
 
     <footer class="footer">
-        <div class="container">
+        <div class="container mx-auto px-4">
             <div class="footer-grid">
                 <div class="footer-brand">
                     <div class="logo-text">EventVenue</div>

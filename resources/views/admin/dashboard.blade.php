@@ -4,19 +4,19 @@
 
 @section('content')
 <div class="page-header py-4 mb-4" style="background:var(--bg-card); border-bottom:1px solid var(--border-strong);">
-    <div class="container d-flex justify-between align-center">
+    <div class="container mx-auto px-4 d-flex justify-between align-center">
         <div>
             <h1 style="color:var(--warning); margin-bottom:.25rem;"><i class="fas fa-shield-halved"></i> Admin Portal</h1>
             <p class="text-muted m-0">Platform overview and management controls.</p>
         </div>
         <div class="d-flex gap-2">
-            <a href="{{ route('admin.users') }}" class="btn btn-secondary"><i class="fas fa-users"></i> Manage Users</a>
-            <a href="{{ route('admin.venues') }}" class="btn btn-secondary"><i class="fas fa-building"></i> Manage Venues</a>
+            <a href="{{ route('admin.users') }}" class="btn btn-secondary w-full sm:w-auto"><i class="fas fa-users"></i> Manage Users</a>
+            <a href="{{ route('admin.venues') }}" class="btn btn-secondary w-full sm:w-auto"><i class="fas fa-building"></i> Manage Venues</a>
         </div>
     </div>
 </div>
 
-<div class="container py-4 mb-5">
+<div class="container mx-auto px-4 py-4 mb-5">
     
     <!-- Pending Action Alert -->
     @if($stats['pending_venues'] > 0)
@@ -79,7 +79,7 @@
     </div>
 
     <!-- Data Tables -->
-    <div class="grid-2">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <!-- Recent Users -->
         <div class="card p-0">
             <div style="padding:1.5rem; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:center;">
@@ -92,7 +92,7 @@
                         @foreach($recentUsers as $u)
                         <tr>
                             <td style="width:50px;">
-                                <img src="{{ $u->avatar_url }}" style="width:32px;height:32px;border-radius:50%;" alt="">
+                                <img class="w-full h-auto object-cover w-full h-auto object-cover" src="{{ $u->avatar_url }}" style="width:32px;height:32px;border-radius:50%;" alt="">
                             </td>
                             <td>
                                 <div class="fw-bold">{{ $u->name }}</div>
@@ -131,7 +131,7 @@
                             </td>
                             <td class="text-muted fs-sm text-right" style="padding-right:1.5rem;">
                                 @if($v->status === 'pending')
-                                    <form action="{{ route('admin.venues.approve', $v) }}" method="POST" style="display:inline;">@csrf <button class="btn btn-outline btn-sm" style="padding:.2rem .5rem;" title="Approve"><i class="fas fa-check"></i></button></form>
+                                    <form action="{{ route('admin.venues.approve', $v) }}" method="POST" style="display:inline;">@csrf <button class="btn btn-outline btn-sm w-full sm:w-auto" style="padding:.2rem .5rem;" title="Approve"><i class="fas fa-check"></i></button></form>
                                 @else
                                     {{ $v->created_at->format('M d') }}
                                 @endif

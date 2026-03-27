@@ -233,7 +233,7 @@
 @section('content')
 
 <div class="page-header pb-4 mb-0" style="padding-top:2.5rem;">
-    <div class="container">
+    <div class="container mx-auto px-4">
         <div class="d-flex align-center gap-2" style="flex-wrap:wrap;">
             <div>
                 <h1 style="font-size:1.85rem;">My <span class="text-gradient">Profile</span></h1>
@@ -243,7 +243,7 @@
     </div>
 </div>
 
-<div class="container" style="padding-top:2rem;padding-bottom:4rem;">
+<div class="container mx-auto px-4" style="padding-top:2rem;padding-bottom:4rem;">
     <div class="profile-grid">
 
         {{-- ─── LEFT: Profile Card ─── --}}
@@ -251,7 +251,7 @@
             <div class="profile-card">
                 <div class="profile-card-banner"></div>
                 <div class="profile-avatar-wrap">
-                    <img class="profile-avatar" src="{{ $user->avatar_url }}" alt="{{ $user->name }}">
+                    <img class="profile-avatar w-full h-auto object-cover w-full h-auto object-cover" src="{{ $user->avatar_url }}" alt="{{ $user->name }}">
                     <div class="profile-name">{{ $user->name }}</div>
                     <div class="profile-email">{{ $user->email }}</div>
                     <div class="profile-role">
@@ -289,7 +289,7 @@
                 </ul>
 
                 <div class="profile-actions">
-                    <a href="{{ route('profile.edit') }}" class="btn btn-primary w-full" style="justify-content:center;">
+                    <a href="{{ route('profile.edit') }}" class="btn btn-primary w-full w-full sm:w-auto" style="justify-content:center;">
                         <i class="fas fa-pen-to-square"></i> Edit Profile
                     </a>
                 </div>
@@ -325,7 +325,7 @@
                     <div class="section-card-title">
                         <i class="fas fa-calendar-days"></i> My Events
                     </div>
-                    <a href="{{ route('events.my') }}" class="btn btn-secondary btn-sm">
+                    <a href="{{ route('events.my') }}" class="btn btn-secondary w-full sm:w-auto">
                         <i class="fas fa-arrow-right"></i> View All
                     </a>
                 </div>
@@ -356,7 +356,7 @@
                             @endphp
                             <span class="badge {{ $eclass }}">{{ ucfirst($event->status) }}</span>
                         </div>
-                        <a href="{{ route('events.show', $event) }}" class="btn btn-secondary btn-sm">
+                        <a href="{{ route('events.show', $event) }}" class="btn btn-secondary w-full sm:w-auto">
                             <i class="fas fa-eye"></i>
                         </a>
                     </div>
@@ -364,7 +364,7 @@
                     <div class="empty-state">
                         <i class="fas fa-calendar-xmark"></i>
                         <p>You haven't created any events yet.</p>
-                        <a href="{{ route('events.create') }}" class="btn btn-primary btn-sm mt-2">
+                        <a href="{{ route('events.create') }}" class="btn btn-primary w-full sm:w-auto">
                             <i class="fas fa-plus"></i> Create Event
                         </a>
                     </div>
@@ -378,7 +378,7 @@
                     <div class="section-card-title">
                         <i class="fas fa-ticket"></i> Booking History
                     </div>
-                    <a href="{{ route('bookings.index') }}" class="btn btn-secondary btn-sm">
+                    <a href="{{ route('bookings.index') }}" class="btn btn-secondary w-full sm:w-auto">
                         <i class="fas fa-arrow-right"></i> View All
                     </a>
                 </div>
@@ -420,7 +420,7 @@
                     <div class="empty-state">
                         <i class="fas fa-ticket-simple"></i>
                         <p>No bookings yet. Find a venue or event to book!</p>
-                        <a href="{{ route('venues.index') }}" class="btn btn-primary btn-sm mt-2">
+                        <a href="{{ route('venues.index') }}" class="btn btn-primary w-full sm:w-auto">
                             <i class="fas fa-building"></i> Browse Venues
                         </a>
                     </div>
@@ -436,17 +436,17 @@
                     </div>
                 </div>
                 <div class="section-card-body">
-                    <div class="grid-2" style="gap:1rem;">
-                        <a href="{{ route('venues.create') }}" class="btn btn-secondary" style="justify-content:center;padding:1rem;">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6" style="gap:1rem;">
+                        <a href="{{ route('venues.create') }}" class="btn btn-secondary w-full sm:w-auto" style="justify-content:center;padding:1rem;">
                             <i class="fas fa-building"></i> List a Venue
                         </a>
-                        <a href="{{ route('events.create') }}" class="btn btn-secondary" style="justify-content:center;padding:1rem;">
+                        <a href="{{ route('events.create') }}" class="btn btn-secondary w-full sm:w-auto" style="justify-content:center;padding:1rem;">
                             <i class="fas fa-calendar-plus"></i> Create Event
                         </a>
-                        <a href="{{ route('chat.index') }}" class="btn btn-secondary" style="justify-content:center;padding:1rem;">
+                        <a href="{{ route('chat.index') }}" class="btn btn-secondary w-full sm:w-auto" style="justify-content:center;padding:1rem;">
                             <i class="fas fa-comments"></i> Live Chat
                         </a>
-                        <a href="{{ route('support.index') }}" class="btn btn-secondary" style="justify-content:center;padding:1rem;">
+                        <a href="{{ route('support.index') }}" class="btn btn-secondary w-full sm:w-auto" style="justify-content:center;padding:1rem;">
                             <i class="fas fa-headset"></i> Support
                         </a>
                     </div>
