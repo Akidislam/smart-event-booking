@@ -24,6 +24,7 @@ class Venue extends Model
         'category',
         'amenities',
         'images',
+        'image',
         'contact_phone',
         'contact_email',
         'status',
@@ -58,8 +59,7 @@ class Venue extends Model
 
     public function getFirstImageAttribute(): string
     {
-        $images = $this->images ?? [];
-        return count($images) > 0 ? $images[0] : 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800';
+        return $this->image ? asset('storage/' . $this->image) : 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800';
     }
 
     public function getPriceFormattedAttribute(): string

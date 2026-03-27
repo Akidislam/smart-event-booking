@@ -53,21 +53,9 @@
         </div>
     </div>
 
-    <!-- Gallery -->
-    @php $images = $venue->images ?? ['https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200']; @endphp
-    <div class="gallery">
-        <img src="{{ $images[0] ?? '/placeholder.jpg' }}" alt="Main Image" class="gallery-main">
-        <div class="gallery-side">
-            <img src="{{ $images[1] ?? 'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800' }}" alt="Image" class="gallery-thumb">
-            <div style="position:relative; width:100%; height:100%;">
-                <img src="{{ $images[2] ?? 'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800' }}" alt="Image" class="gallery-thumb">
-                @if(count($images) > 3)
-                    <div style="position:absolute; inset:0; background:rgba(0,0,0,0.6); display:flex; align-items:center; justify-content:center; color:#fff; font-size:1.5rem; font-weight:700; cursor:pointer;">
-                        +{{ count($images) - 3 }} Photos
-                    </div>
-                @endif
-            </div>
-        </div>
+    <!-- Single Image banner -->
+    <div class="gallery" style="display:block; height:400px; margin-bottom: 2rem;">
+        <img src="{{ $venue->image ? asset('storage/'.$venue->image) : 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200' }}" alt="Venue Image" style="width:100%; height:100%; object-fit:cover; border-radius: var(--radius-lg);">
     </div>
 
     <div class="content-grid">

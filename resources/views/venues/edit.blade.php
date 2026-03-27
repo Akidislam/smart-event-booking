@@ -73,14 +73,24 @@
             <input type="hidden" name="longitude" value="{{ old('longitude') }}">
 
             <h3 class="fw-bold mb-3 pb-2 border-bottom" style="border-bottom:1px solid var(--border)">Media</h3>
+            
+            @if($venue->image)
+            <div class="mb-4">
+                <label class="form-label">Current Image</label>
+                <div style="max-width:300px; border-radius:var(--radius); overflow:hidden; border:1px solid var(--border);">
+                    <img src="{{ asset('storage/' . $venue->image) }}" alt="Venue Image" style="width:100%; height:auto; display:block;">
+                </div>
+            </div>
+            @endif
+
             <div class="form-group mb-5">
-                <label class="form-label">Venue Images <span class="text-muted text-sm">(Max 5 images)</span></label>
+                <label class="form-label">Update Venue Image <span class="text-muted text-sm">(Leave blank to keep current)</span></label>
                 <div style="border: 2px dashed rgba(99,102,241,0.5); border-radius:var(--radius); padding:2rem; text-align:center; background:rgba(99,102,241,0.05);">
                     <i class="fas fa-cloud-upload-alt" style="font-size:3rem; color:var(--primary-light); margin-bottom:1rem;"></i>
-                    <p class="mb-3">Drag and drop images here or click to upload.</p>
-                    <input type="file" name="images[]" multiple accept="image/*" class="form-control" style="background:transparent; border:none; padding:0; width:100%;">
+                    <p class="mb-3">Upload a new image to replace the current one.</p>
+                    <input type="file" name="image" accept="image/jpeg,image/png,image/jpg" class="form-control" style="background:transparent; border:none; padding:0; width:100%;">
+                    @error('image')<span class="text-danger fs-sm" style="display:block;margin-top:.5rem;">{{ $message }}</span>@enderror
                 </div>
-                <p class="text-muted mt-2 fs-sm"><i class="fas fa-info-circle"></i> High-quality images significantly increase booking rates.</p>
             </div>
 
             <div class="d-flex justify-between border-top pt-4" style="border-top:1px solid var(--border)">

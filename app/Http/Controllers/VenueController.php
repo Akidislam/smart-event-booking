@@ -90,17 +90,15 @@ class VenueController extends Controller
             'amenities' => 'nullable|array',
             'contact_phone' => 'nullable|string|max:20',
             'contact_email' => 'nullable|email',
+            'image' => 'required|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
         $validated['user_id'] = Auth::id();
 
         // Handle image uploads
-        if ($request->hasFile('images')) {
-            $imagePaths = [];
-            foreach ($request->file('images') as $image) {
-                $imagePaths[] = $image->store('venues', 'public');
-            }
-            $validated['images'] = $imagePaths;
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('venues', 'public');
+            $validated['image'] = $path;
         }
 
         $venue = Venue::create($validated);
@@ -140,7 +138,14 @@ class VenueController extends Controller
             'amenities' => 'nullable|array',
             'contact_phone' => 'nullable|string|max:20',
             'contact_email' => 'nullable|email',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
+
+        // Handle image uploads
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('venues', 'public');
+            $validated['image'] = $path;
+        }
 
         $venue->update($validated);
 
