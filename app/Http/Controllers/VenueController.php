@@ -105,6 +105,12 @@ class VenueController extends Controller
 
         $venue = Venue::create($validated);
 
+        // Auto-promote user to venue_owner role on their first listing
+        $user = Auth::user();
+        if ($user->role === 'user' || $user->role === null) {
+            $user->update(['role' => 'venue_owner']);
+        }
+
         return redirect()->route('venues.show', $venue)->with('success', 'Venue created successfully!');
     }
 

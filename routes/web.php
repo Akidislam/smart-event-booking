@@ -26,20 +26,18 @@ Route::post('/logout', [AuthController::class , 'logout'])->name('logout')->midd
 Route::get('/auth/google', [GoogleAuthController::class , 'redirect'])->name('auth.google');
 Route::get('/auth/google/callback', [GoogleAuthController::class , 'callback'])->name('auth.google.callback');
 
-// Venues (public browsing)
+// Venues (public browsing) — index only; create must come before {venue} wildcard
 Route::get('/venues', [VenueController::class , 'index'])->name('venues.index');
-Route::get('/venues/{venue}', [VenueController::class , 'show'])->name('venues.show');
 
-// Events (public browsing)
+// Events (public browsing) — index only; create must come before {event} wildcard
 Route::get('/events', [EventController::class , 'index'])->name('events.index');
-Route::get('/events/{event}', [EventController::class , 'show'])->name('events.show');
 
 // Authenticated routes
 Route::middleware('auth')->group(function () {
     // Dashboard
     Route::get('/dashboard', [HomeController::class , 'dashboard'])->name('dashboard');
 
-    // Venues management
+    // Venues management — create/store MUST be before {venue} wildcard
     Route::get('/venues/create', [VenueController::class , 'create'])->name('venues.create');
     Route::post('/venues', [VenueController::class , 'store'])->name('venues.store');
     Route::get('/venues/{venue}/edit', [VenueController::class , 'edit'])->name('venues.edit');
@@ -48,7 +46,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/venues/{venue}/book', [VenueController::class , 'book'])->name('venues.book');
     Route::get('/my-venues', [VenueController::class , 'myVenues'])->name('venues.my');
 
-    // Events management
+    // Events management — create/store MUST be before {event} wildcard
     Route::get('/events/create', [EventController::class , 'create'])->name('events.create');
     Route::post('/events', [EventController::class , 'store'])->name('events.store');
     Route::get('/events/{event}/edit', [EventController::class , 'edit'])->name('events.edit');
@@ -59,9 +57,17 @@ Route::middleware('auth')->group(function () {
     // Bookings
     Route::get('/bookings', [BookingController::class , 'index'])->name('bookings.index');
     Route::get('/bookings/{booking}', [BookingController::class , 'show'])->name('bookings.show');
+    Route::post('/bookings/{booking}/cancel', [BookingController::class , 'cancel'])->name('bookings.cancel');
+});
+
+// Public show routes — MUST come AFTER all static-segment routes (create, etc.)
+Route::get('/venues/{venue}', [VenueController::class , 'show'])->name('venues.show');
+Route::get('/events/{event}', [EventController::class , 'show'])->name('events.show');
+
+// Event booking — needs auth but uses {event} wildcard, so after auth group
+Route::middleware('auth')->group(function () {
     Route::get('/events/{event}/book', [BookingController::class , 'createEventBooking'])->name('bookings.event.create');
     Route::post('/events/{event}/book', [BookingController::class , 'storeEventBooking'])->name('bookings.event.store');
-    Route::post('/bookings/{booking}/cancel', [BookingController::class , 'cancel'])->name('bookings.cancel');
 });
 
 // Admin routes
