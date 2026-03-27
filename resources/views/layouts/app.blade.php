@@ -370,9 +370,11 @@
                         <a href="{{ route('bookings.index') }}"><i class="fas fa-ticket"></i> My Bookings</a>
                         <a href="{{ route('events.my') }}"><i class="fas fa-calendar-plus"></i> My Events</a>
                         <a href="{{ route('venues.my') }}"><i class="fas fa-building"></i> My Venues</a>
+                        <a href="{{ route('support.index') }}"><i class="fas fa-headset"></i> Support</a>
                         @if(auth()->user()->isAdmin())
                             <div class="divider"></div>
                             <a href="{{ route('admin.dashboard') }}" style="color:var(--warning)"><i class="fas fa-shield-halved"></i> Admin Panel</a>
+                            <a href="{{ route('admin.support.index') }}" style="color:var(--warning)"><i class="fas fa-inbox"></i> Support Messages</a>
                         @endif
                         <div class="divider"></div>
                         <form action="{{ route('logout') }}" method="POST">
@@ -396,6 +398,7 @@
         @auth
             <a href="{{ route('dashboard') }}"><i class="fas fa-gauge"></i> Dashboard</a>
             <a href="{{ route('bookings.index') }}"><i class="fas fa-ticket"></i> My Bookings</a>
+            <a href="{{ route('support.index') }}"><i class="fas fa-headset"></i> Support</a>
         @else
             <a href="{{ route('login') }}"><i class="fas fa-right-to-bracket"></i> Login</a>
             <a href="{{ route('register') }}"><i class="fas fa-user-plus"></i> Register</a>

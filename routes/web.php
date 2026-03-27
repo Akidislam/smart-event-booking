@@ -1,11 +1,13 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\AdminSupportController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\GoogleAuthController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SupportController;
 use App\Http\Controllers\VenueController;
 use Illuminate\Support\Facades\Route;
 
@@ -58,6 +60,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/bookings', [BookingController::class , 'index'])->name('bookings.index');
     Route::get('/bookings/{booking}', [BookingController::class , 'show'])->name('bookings.show');
     Route::post('/bookings/{booking}/cancel', [BookingController::class , 'cancel'])->name('bookings.cancel');
+
+    // Support
+    Route::get('/support', [SupportController::class , 'index'])->name('support.index');
+    Route::post('/support', [SupportController::class , 'store'])->name('support.store');
 });
 
 // Public show routes — MUST come AFTER all static-segment routes (create, etc.)
@@ -80,4 +86,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::post('/venues/{venue}/reject', [AdminController::class , 'rejectVenue'])->name('venues.reject');
     Route::get('/bookings', [AdminController::class , 'bookings'])->name('bookings');
     Route::get('/events', [AdminController::class , 'events'])->name('events');
+    // Support
+    Route::get('/support', [AdminSupportController::class , 'index'])->name('support.index');
+    Route::post('/support/{message}/reply', [AdminSupportController::class , 'reply'])->name('support.reply');
 });
