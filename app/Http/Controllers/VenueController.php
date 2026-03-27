@@ -17,16 +17,30 @@ class VenueController extends Controller
             $query->byCategory($request->category);
         }
 
-        if ($request->filled('city')) {
-            $query->byCity($request->city);
+        if ($request->filled('location')) {
+            $query->where(function ($q) use ($request) {
+                $q->where('city', 'like', '%' . $request->location . '%')
+                    ->orWhere('address', 'like', '%' . $request->location . '%');
+            });
         }
 
-        if ($request->filled('min_capacity')) {
-            $query->where('capacity', '>=', $request->min_capacity);
+        if ($request->filled('min_price')) {
+            $query->where('price_per_hour', '>=', $request->min_price);
         }
 
         if ($request->filled('max_price')) {
             $query->where('price_per_hour', '<=', $request->max_price);
+        }
+
+        if ($request->filled('capacity')) {
+            $query->where('capacity', '>=', $request->capacity);
+        }
+
+        if ($request->filled('date')) {
+            $query->whereDoesntHave('bookings', function ($q) use ($request) {
+                $q->whereDate('start_datetime', '<=', $request->date)
+                    ->whereDate('end_datetime', '>=', $request->date);
+            });
         }
 
         if ($request->filled('search')) {
@@ -35,6 +49,12 @@ class VenueController extends Controller
                     ->orWhere('address', 'like', '%' . $request->search . '%')
                     ->orWhere('city', 'like', '%' . $request->search . '%');
             });
+        }
+
+        // Only return HTML content if it's an AJAX request to avoid loading full page layout
+        if ($request->ajax()) {
+            $venues = $query->orderByDesc('rating')->paginate(9);
+            return view('venues.partials.listing', compact('venues'))->render();
         }
 
         $venues = $query->orderByDesc('rating')->paginate(9);

@@ -32,67 +32,15 @@
 <div class="container mb-5">
     <div class="venue-grid">
         <!-- Main Listing -->
-        <div>
-            <div class="d-flex justify-between align-center mb-4">
-                <h3 class="fw-bold fs-sm text-muted">Showing {{ $venues->firstItem() ?? 0 }} - {{ $venues->lastItem() ?? 0 }} out of {{ $venues->total() }} venues</h3>
-                <div class="d-flex gap-2">
-                    <button class="btn btn-secondary btn-sm" onclick="document.querySelector('.filters-card').style.display = 'block'"><i class="fas fa-filter"></i> Filters</button>
-                </div>
-            </div>
-
-            <div class="venue-listing mb-5">
-                @forelse($venues as $venue)
-                <div class="card" style="transition:var(--transition)">
-                    <div style="position:relative; aspect-ratio:16/10; overflow:hidden; border-bottom:1px solid var(--border)">
-                        <a href="{{ route('venues.show', $venue) }}">
-                            <img src="{{ $venue->first_image }}" alt="{{ $venue->name }}" style="width:100%; height:100%; object-fit:cover;">
-                        </a>
-                        <span class="badge badge-primary" style="position:absolute; top:1rem; left:1rem;">{{ \App\Models\Venue::categories()[$venue->category] ?? $venue->category }}</span>
-                        <div style="position:absolute; bottom:1rem; right:1rem; background:rgba(0,0,0,0.8); backdrop-filter:blur(4px); padding:.35rem .75rem; border-radius:50px; font-weight:700; color:#fff;">{{ $venue->price_formatted }}/hr</div>
-                    </div>
-                    <div class="card-body p-3">
-                        <div class="d-flex justify-between align-center mb-1">
-                            <h4 class="fw-bold" style="font-size:1.1rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
-                                <a href="{{ route('venues.show', $venue) }}" style="color:inherit; text-decoration:none;">{{ $venue->name }}</a>
-                            </h4>
-                            <div class="text-warning fw-bold fs-sm"><i class="fas fa-star"></i> {{ number_format($venue->rating, 1) }}</div>
-                        </div>
-                        <div class="text-muted fs-sm mb-3"><i class="fas fa-location-dot"></i> {{ $venue->address }}, {{ $venue->city }}</div>
-                        <div class="d-flex justify-between align-center border-top pt-3" style="border-top:1px solid var(--border-strong);">
-                            <div class="text-muted fs-sm"><i class="fas fa-users text-primary"></i> Cap: {{ $venue->capacity }} pax</div>
-                            <div class="d-flex gap-2">
-                                @can('update', $venue)
-                                    <a href="{{ route('venues.edit', $venue) }}" class="btn btn-outline btn-sm" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">Edit</a>
-                                    <form action="{{ route('venues.destroy', $venue) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this venue?');" style="display:inline-block; margin:0;">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-outline btn-sm text-danger" style="padding: 0.25rem 0.5rem; font-size: 0.8rem; border-color: var(--danger, #dc3545);">Delete</button>
-                                    </form>
-                                @endcan
-                                <a href="{{ route('venues.show', $venue) }}" class="btn btn-primary btn-sm" style="padding: 0.25rem 0.75rem; font-size: 0.8rem;">Book Now</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                @empty
-                <div class="card" style="grid-column:1/-1; padding:4rem; text-align:center;">
-                    <i class="fas fa-search" style="font-size:3rem; color:var(--text-muted); opacity:0.3; margin-bottom:1rem; display:block;"></i>
-                    <h3 class="mb-2">No venues found</h3>
-                    <p class="text-muted mb-4">Try adjusting your filters or search query.</p>
-                    <a href="{{ route('venues.index') }}" class="btn btn-primary">Clear Filters</a>
-                </div>
-                @endforelse
-            </div>
-
-            <div class="d-flex justify-center mt-5">
-                {{ $venues->links() }}
-            </div>
+        <div id="venues-listing-container">
+            @include('venues.partials.listing')
         </div>
 
         <!-- Sidebar Filters -->
-        <form action="{{ route('venues.index') }}" method="GET" class="filters-card">
+        <!-- Sidebar Filters -->
+        <form action="{{ route('venues.index') }}" method="GET" class="filters-card" id="filter-form">
             <h3 class="fw-bold mb-4" style="font-size:1.2rem; border-bottom: 1px solid var(--border); padding-bottom:.75rem;">
-                <i class="fas fa-sliders H text-primary"></i> Filter Venues
+                <i class="fas fa-sliders-h text-primary"></i> Filter Venues
             </h3>
 
             <div class="filter-group">
@@ -104,7 +52,16 @@
                 <div class="filter-title">Location</div>
                 <div class="input-icon">
                     <i class="fas fa-map-marker-alt"></i>
-                    <input type="text" name="city" class="filter-input pl-4" placeholder="City or region" value="{{ request('city') }}">
+                    <select name="location" class="filter-input pl-4" style="appearance: auto;">
+                        <option value="">All over Bangladesh</option>
+                        <option value="Dhaka" {{ request('location') == 'Dhaka' ? 'selected' : '' }}>Dhaka</option>
+                        <option value="Gazipur" {{ request('location') == 'Gazipur' ? 'selected' : '' }}>Gazipur</option>
+                        <option value="Chittagong" {{ request('location') == 'Chittagong' ? 'selected' : '' }}>Chittagong</option>
+                        <option value="Sylhet" {{ request('location') == 'Sylhet' ? 'selected' : '' }}>Sylhet</option>
+                        <option value="Rajshahi" {{ request('location') == 'Rajshahi' ? 'selected' : '' }}>Rajshahi</option>
+                        <option value="Khulna" {{ request('location') == 'Khulna' ? 'selected' : '' }}>Khulna</option>
+                        <option value="Barisal" {{ request('location') == 'Barisal' ? 'selected' : '' }}>Barisal</option>
+                    </select>
                 </div>
             </div>
 
@@ -123,23 +80,142 @@
             </div>
 
             <div class="filter-group">
-                <div class="filter-title">Minimum Capacity</div>
-                <input type="number" name="min_capacity" class="filter-input" placeholder="e.g. 50" value="{{ request('min_capacity') }}">
+                <div class="filter-title">Event Date</div>
+                <div class="input-icon">
+                    <i class="fas fa-calendar-alt"></i>
+                    <input type="date" name="date" class="filter-input pl-4" value="{{ request('date') }}">
+                </div>
             </div>
 
             <div class="filter-group">
-                <div class="filter-title">Max Price (Hourly)</div>
-                <div class="input-icon">
-                    <i class="fas fa-tags"></i>
-                    <input type="number" name="max_price" class="filter-input pl-4" placeholder="e.g. 5000" value="{{ request('max_price') }}">
+                <div class="filter-title">Minimum Capacity</div>
+                <input type="number" name="capacity" class="filter-input" placeholder="e.g. 50" value="{{ request('capacity') }}">
+            </div>
+
+            <div class="filter-group">
+                <div class="filter-title">Price Range (Hourly)</div>
+                <div class="d-flex gap-2 mb-2">
+                    <input type="number" name="min_price" class="filter-input" placeholder="Min Price" value="{{ request('min_price') }}">
+                </div>
+                <div class="d-flex gap-2">
+                    <input type="number" name="max_price" class="filter-input" placeholder="Max Price" value="{{ request('max_price') }}">
                 </div>
             </div>
 
             <div class="d-flex gap-2 mt-4 pt-3 border-top">
-                <a href="{{ route('venues.index') }}" class="btn btn-secondary w-full justify-center">Reset</a>
+                <button type="button" class="btn btn-secondary w-full justify-center" onclick="resetFilters()">Reset</button>
                 <button type="submit" class="btn btn-primary w-full justify-center">Apply Filters</button>
             </div>
         </form>
     </div>
+
+@push('scripts')
+<script>
+    const filterForm = document.getElementById('filter-form');
+    const listingContainer = document.getElementById('venues-listing-container');
+    let timeoutId;
+
+    filterForm.addEventListener('input', function(e) {
+        if (e.target.type !== 'submit' && e.target.type !== 'button') {
+            clearTimeout(timeoutId);
+            timeoutId = setTimeout(() => {
+                fetchVenues();
+            }, 500); // Debounce
+        }
+    });
+
+    filterForm.addEventListener('change', function(e) {
+        if (e.target.tagName === 'SELECT' || e.target.type === 'radio' || e.target.type === 'date') {
+            fetchVenues();
+        }
+    });
+
+    filterForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        fetchVenues();
+    });
+
+    function resetFilters() {
+        filterForm.reset();
+        
+        // Ensure manual clearing of inputs to bypass cached states
+        Array.from(filterForm.elements).forEach(el => {
+            if(el.type === 'text' || el.type === 'number' || el.type === 'date') el.value = '';
+            if(el.type === 'radio' && el.value === '') el.checked = true;
+            if(el.type === 'select-one') el.selectedIndex = 0;
+        });
+        
+        fetchVenues();
+    }
+
+    // Export resetting function for usage in the empty state
+    window.resetFilters = resetFilters;
+
+    window.removeFilter = function(filterKey) {
+        if (filterKey === 'price') {
+            document.querySelector('input[name="min_price"]').value = '';
+            document.querySelector('input[name="max_price"]').value = '';
+        } else if (filterKey === 'category') {
+            const defaultRadio = document.querySelector('input[name="category"][value=""]');
+            if(defaultRadio) defaultRadio.checked = true;
+        } else {
+            const el = document.querySelector(`[name="${filterKey}"]`);
+            if(el) {
+                if(el.type === 'radio') {
+                    document.querySelector(`input[name="${filterKey}"][value=""]`).checked = true;
+                } else {
+                    el.value = '';
+                }
+            }
+        }
+        fetchVenues();
+    };
+
+    function fetchVenues(url = null) {
+        const formData = new FormData(filterForm);
+        const params = new URLSearchParams(formData);
+        
+        let requestUrl = url || `{{ route('venues.index') }}?${params.toString()}`;
+
+        // Update URL
+        window.history.pushState({}, '', requestUrl);
+
+        // Show loading state
+        listingContainer.style.opacity = '0.5';
+
+        fetch(requestUrl, {
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        })
+        .then(response => response.text())
+        .then(html => {
+            listingContainer.innerHTML = html;
+            listingContainer.style.opacity = '1';
+            
+            // Re-attach pagination handlers since HTML changed
+            attachPaginationHandlers();
+        })
+        .catch(error => {
+            console.error('Error fetching venues:', error);
+            listingContainer.style.opacity = '1';
+        });
+    }
+
+    function attachPaginationHandlers() {
+        const links = listingContainer.querySelectorAll('.pagination a');
+        links.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                fetchVenues(this.href);
+            });
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        attachPaginationHandlers();
+    });
+</script>
+@endpush
 </div>
 @endsection
