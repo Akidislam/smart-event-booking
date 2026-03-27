@@ -354,6 +354,12 @@
             @auth
                 <li><a href="{{ route('dashboard') }}" class="{{ request()->routeIs('dashboard') ? 'active' : '' }}"><i class="fas fa-gauge"></i> Dashboard</a></li>
                 <li><a href="{{ route('bookings.index') }}" class="{{ request()->routeIs('bookings.*') ? 'active' : '' }}"><i class="fas fa-ticket"></i> My Bookings</a></li>
+                <li>
+                    <a href="{{ route('chat.index') }}" class="{{ request()->routeIs('chat.*') ? 'active' : '' }}" style="position:relative;">
+                        <i class="fas fa-comments"></i> Chat
+                        <span id="navUnreadBadge" style="display:none;position:absolute;top:-4px;right:-4px;background:var(--secondary);color:#fff;font-size:.6rem;font-weight:700;width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;"></span>
+                    </a>
+                </li>
             @endauth
         </ul>
 
@@ -371,6 +377,7 @@
                         <a href="{{ route('events.my') }}"><i class="fas fa-calendar-plus"></i> My Events</a>
                         <a href="{{ route('venues.my') }}"><i class="fas fa-building"></i> My Venues</a>
                         <a href="{{ route('support.index') }}"><i class="fas fa-headset"></i> Support</a>
+                        <a href="{{ route('chat.index') }}"><i class="fas fa-comments"></i> Live Chat</a>
                         @if(auth()->user()->isAdmin())
                             <div class="divider"></div>
                             <a href="{{ route('admin.dashboard') }}" style="color:var(--warning)"><i class="fas fa-shield-halved"></i> Admin Panel</a>
@@ -399,6 +406,7 @@
             <a href="{{ route('dashboard') }}"><i class="fas fa-gauge"></i> Dashboard</a>
             <a href="{{ route('bookings.index') }}"><i class="fas fa-ticket"></i> My Bookings</a>
             <a href="{{ route('support.index') }}"><i class="fas fa-headset"></i> Support</a>
+            <a href="{{ route('chat.index') }}"><i class="fas fa-comments"></i> Live Chat</a>
         @else
             <a href="{{ route('login') }}"><i class="fas fa-right-to-bracket"></i> Login</a>
             <a href="{{ route('register') }}"><i class="fas fa-user-plus"></i> Register</a>
@@ -488,5 +496,31 @@
         }, 4000);
     </script>
     @stack('scripts')
+    @auth
+    <script>
+    // Poll unread chat count and update badge every 5s
+    (function() {
+        const badge = document.getElementById('navUnreadBadge');
+        if (!badge) return;
+        async function checkUnread() {
+            try {
+                const res = await fetch('{{ route("chat.unread") }}', {
+                    headers: { 'Accept': 'application/json', 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content }
+                });
+                if (!res.ok) return;
+                const data = await res.json();
+                if (data.count > 0) {
+                    badge.textContent = data.count > 9 ? '9+' : data.count;
+                    badge.style.display = 'flex';
+                } else {
+                    badge.style.display = 'none';
+                }
+            } catch(e) {}
+        }
+        checkUnread();
+        setInterval(checkUnread, 5000);
+    })();
+    </script>
+    @endauth
 </body>
 </html>

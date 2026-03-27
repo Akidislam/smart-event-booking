@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AdminSupportController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\GoogleAuthController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SupportController;
@@ -64,6 +65,12 @@ Route::middleware('auth')->group(function () {
     // Support
     Route::get('/support', [SupportController::class , 'index'])->name('support.index');
     Route::post('/support', [SupportController::class , 'store'])->name('support.store');
+
+    // Live Chat
+    Route::get('/chat', [ChatController::class , 'index'])->name('chat.index');
+    Route::post('/chat/send', [ChatController::class , 'send'])->name('chat.send');
+    Route::get('/chat/messages/{user}', [ChatController::class , 'fetchMessages'])->name('chat.fetch');
+    Route::get('/chat/unread', [ChatController::class , 'unreadCount'])->name('chat.unread');
 });
 
 // Public show routes — MUST come AFTER all static-segment routes (create, etc.)
