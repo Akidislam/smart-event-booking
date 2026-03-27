@@ -38,7 +38,14 @@ class AdminController extends Controller
             ->pluck('revenue', 'month')
             ->toArray();
 
-        return view('admin.dashboard', compact('stats', 'recentBookings', 'recentUsers', 'recentVenues', 'monthlyRevenue'));
+        // Monthly bookings count for chart
+        $monthlyBookings = Booking::selectRaw('MONTH(created_at) as month, COUNT(*) as count')
+            ->groupBy('month')
+            ->whereYear('created_at', now()->year)
+            ->pluck('count', 'month')
+            ->toArray();
+
+        return view('admin.dashboard', compact('stats', 'recentBookings', 'recentUsers', 'recentVenues', 'monthlyRevenue', 'monthlyBookings'));
     }
 
     public function users(Request $request)
