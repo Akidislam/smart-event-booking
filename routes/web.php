@@ -8,6 +8,7 @@ use App\Http\Controllers\BookingController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SupportController;
 use App\Http\Controllers\VenueController;
 use Illuminate\Support\Facades\Route;
@@ -39,6 +40,11 @@ Route::get('/events', [EventController::class , 'index'])->name('events.index');
 Route::middleware('auth')->group(function () {
     // Dashboard
     Route::get('/dashboard', [HomeController::class , 'dashboard'])->name('dashboard');
+
+    // Profile
+    Route::get('/profile', [ProfileController::class , 'index'])->name('profile.index');
+    Route::get('/profile/edit', [ProfileController::class , 'edit'])->name('profile.edit');
+    Route::post('/profile/update', [ProfileController::class , 'update'])->name('profile.update');
 
     // Venues management — create/store MUST be before {venue} wildcard
     Route::get('/venues/create', [VenueController::class , 'create'])->name('venues.create');

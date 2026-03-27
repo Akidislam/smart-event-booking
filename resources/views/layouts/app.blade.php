@@ -373,6 +373,7 @@
                             <div style="color:var(--text-muted);font-size:.8rem;">{{ auth()->user()->email }}</div>
                         </div>
                         <a href="{{ route('dashboard') }}"><i class="fas fa-gauge"></i> Dashboard</a>
+                        <a href="{{ route('profile.index') }}"><i class="fas fa-user-circle"></i> My Profile</a>
                         <a href="{{ route('bookings.index') }}"><i class="fas fa-ticket"></i> My Bookings</a>
                         <a href="{{ route('events.my') }}"><i class="fas fa-calendar-plus"></i> My Events</a>
                         <a href="{{ route('venues.my') }}"><i class="fas fa-building"></i> My Venues</a>
