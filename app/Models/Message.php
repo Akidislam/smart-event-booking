@@ -13,6 +13,9 @@ class Message extends Model
         'sender_id',
         'receiver_id',
         'message',
+        'attachment',
+        'attachment_name',
+        'attachment_type',
         'read_at',
     ];
 
@@ -33,6 +36,26 @@ class Message extends Model
     public function isRead(): bool
     {
         return $this->read_at !== null;
+    }
+
+    public function hasAttachment(): bool
+    {
+        return !empty($this->attachment);
+    }
+
+    public function isImage(): bool
+    {
+        return $this->hasAttachment() && str_starts_with($this->attachment_type ?? '', 'image');
+    }
+
+    public function isFile(): bool
+    {
+        return $this->hasAttachment() && !$this->isImage();
+    }
+
+    public function getAttachmentUrl(): ?string
+    {
+        return $this->attachment ? asset('storage/' . $this->attachment) : null;
     }
 
     /**

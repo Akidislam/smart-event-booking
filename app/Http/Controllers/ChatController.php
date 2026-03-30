@@ -72,21 +72,35 @@ class ChatController extends Controller
     }
 
     /**
-     * Send a message (AJAX).
+     * Send a message (AJAX) — supports text + file/image attachments.
      */
     public function send(Request $request)
     {
         $request->validate([
             'receiver_id' => 'required|exists:users,id',
-            'message' => 'required|string|max:2000',
+            'message' => 'nullable|string|max:2000',
+            'attachment' => 'nullable|file|max:10240', // 10MB max
         ]);
 
-        $msg = Message::create([
+        // Must have at least a message or an attachment
+        if (!$request->message && !$request->hasFile('attachment')) {
+            return response()->json(['error' => 'Message or attachment is required.'], 422);
+        }
+
+        $data = [
             'sender_id' => Auth::id(),
             'receiver_id' => $request->receiver_id,
             'message' => $request->message,
-        ]);
+        ];
 
+        if ($request->hasFile('attachment')) {
+            $file = $request->file('attachment');
+            $data['attachment'] = $file->store('chat-attachments', 'public');
+            $data['attachment_name'] = $file->getClientOriginalName();
+            $data['attachment_type'] = str_starts_with($file->getMimeType(), 'image') ? 'image' : 'file';
+        }
+
+        $msg = Message::create($data);
         $msg->load('sender');
 
         return response()->json([
@@ -98,6 +112,9 @@ class ChatController extends Controller
             'sender_avatar' => $msg->sender->avatar_url,
             'created_at' => $msg->created_at->format('h:i A'),
             'is_mine' => true,
+            'attachment' => $msg->attachment ? asset('storage/' . $msg->attachment) : null,
+            'attachment_name' => $msg->attachment_name,
+            'attachment_type' => $msg->attachment_type,
         ]);
     }
 
@@ -121,6 +138,9 @@ class ChatController extends Controller
         'sender_avatar' => $m->sender->avatar_url,
         'created_at' => $m->created_at->format('h:i A'),
         'is_mine' => $m->sender_id === $authUser->id,
+        'attachment' => $m->attachment ? asset('storage/' . $m->attachment) : null,
+        'attachment_name' => $m->attachment_name,
+        'attachment_type' => $m->attachment_type,
         ]);
 
         // Mark as read

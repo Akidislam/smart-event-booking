@@ -388,7 +388,7 @@
         <div class="nav-actions">
             @auth
                 <div class="dropdown">
-                    <img src="{{ auth()->user()->avatar_url }}" alt="{{ auth()->user()->name }}" class="nav-avatar w-full h-auto object-cover">
+                    <img src="{{ auth()->user()->avatar_url }}" alt="{{ auth()->user()->name }}" class="nav-avatar">
                     <div class="dropdown-menu">
                         <div style="padding:.5rem .9rem .75rem; border-bottom:1px solid var(--border); margin-bottom:.25rem;">
                             <div style="font-weight:600;font-size:.9rem;">{{ auth()->user()->name }}</div>
@@ -453,6 +453,7 @@
         @yield('content')
     </main>
 
+    @unless(request()->routeIs('chat.*'))
     <footer class="footer">
         <div class="container mx-auto px-4">
             <div class="footer-grid">
@@ -504,6 +505,7 @@
             </div>
         </div>
     </footer>
+    @endunless
 
     <style>
         @keyframes slideIn { from { opacity:0; transform:translateX(20px); } to { opacity:1; transform:translateX(0); } }
