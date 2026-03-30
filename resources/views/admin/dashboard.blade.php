@@ -12,6 +12,7 @@
         <div class="d-flex gap-2">
             <a href="{{ route('admin.users') }}" class="btn btn-secondary w-full sm:w-auto"><i class="fas fa-users"></i> Manage Users</a>
             <a href="{{ route('admin.venues') }}" class="btn btn-secondary w-full sm:w-auto"><i class="fas fa-building"></i> Manage Venues</a>
+            <a href="{{ route('admin.menu.categories.index') }}" class="btn btn-secondary w-full sm:w-auto"><i class="fas fa-utensils"></i> Food Menu</a>
         </div>
     </div>
 </div>

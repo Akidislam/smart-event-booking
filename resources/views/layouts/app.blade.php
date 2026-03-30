@@ -405,7 +405,8 @@
                             <div class="divider"></div>
                             <a href="{{ route('admin.dashboard') }}" style="color:var(--warning)"><i class="fas fa-shield-halved"></i> Admin Panel</a>
                             <a href="{{ route('admin.support.index') }}" style="color:var(--warning)"><i class="fas fa-inbox"></i> Support Messages</a>
-                            <a href="{{ route('admin.menu.categories.index') }}" style="color:var(--warning)"><i class="fas fa-utensils"></i> Menu Management</a>
+                            <a href="{{ route('admin.menu.categories.index') }}" style="color:var(--warning)"><i class="fas fa-layer-group"></i> Menu Categories</a>
+                            <a href="{{ route('admin.menu.items.index') }}" style="color:var(--warning)"><i class="fas fa-bowl-food"></i> Menu Items</a>
                         @endif
                         <div class="divider"></div>
                         <form action="{{ route('logout') }}" method="POST">

@@ -10,9 +10,14 @@
                 <h1><i class="fas fa-layer-group text-gradient"></i> Menu Categories</h1>
                 <p>Create and manage food menu categories for your events</p>
             </div>
-            <button class="btn btn-primary" onclick="document.getElementById('addCategoryModal').style.display='flex'">
-                <i class="fas fa-plus"></i> Add Category
-            </button>
+            <div style="display:flex;gap:.75rem;flex-wrap:wrap;">
+                <a href="{{ route('admin.menu.items.index') }}" class="btn btn-secondary btn-sm">
+                    <i class="fas fa-bowl-food"></i> Manage Items
+                </a>
+                <button class="btn btn-primary" onclick="document.getElementById('addCategoryModal').style.display='flex'">
+                    <i class="fas fa-plus"></i> Add Category
+                </button>
+            </div>
         </div>
     </div>
 </div>
