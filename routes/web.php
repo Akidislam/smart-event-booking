@@ -2,12 +2,15 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AdminSupportController;
+use App\Http\Controllers\Admin\MenuCategoryController;
+use App\Http\Controllers\Admin\MenuItemController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\GoogleAuthController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SupportController;
 use App\Http\Controllers\VenueController;
@@ -35,6 +38,10 @@ Route::get('/venues', [VenueController::class , 'index'])->name('venues.index');
 
 // Events (public browsing) — index only; create must come before {event} wildcard
 Route::get('/events', [EventController::class , 'index'])->name('events.index');
+
+// Menu (public browsing)
+Route::get('/menu', [MenuController::class , 'index'])->name('menu.index');
+Route::get('/menu/{category}', [MenuController::class , 'show'])->name('menu.show');
 
 // Authenticated routes
 Route::middleware('auth')->group(function () {
@@ -102,4 +109,15 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     // Support
     Route::get('/support', [AdminSupportController::class , 'index'])->name('support.index');
     Route::post('/support/{message}/reply', [AdminSupportController::class , 'reply'])->name('support.reply');
+
+    // Menu Management
+    Route::get('/menu/categories', [MenuCategoryController::class , 'index'])->name('menu.categories.index');
+    Route::post('/menu/categories', [MenuCategoryController::class , 'store'])->name('menu.categories.store');
+    Route::put('/menu/categories/{category}', [MenuCategoryController::class , 'update'])->name('menu.categories.update');
+    Route::delete('/menu/categories/{category}', [MenuCategoryController::class , 'destroy'])->name('menu.categories.destroy');
+
+    Route::get('/menu/items', [MenuItemController::class , 'index'])->name('menu.items.index');
+    Route::post('/menu/items', [MenuItemController::class , 'store'])->name('menu.items.store');
+    Route::put('/menu/items/{item}', [MenuItemController::class , 'update'])->name('menu.items.update');
+    Route::delete('/menu/items/{item}', [MenuItemController::class , 'destroy'])->name('menu.items.destroy');
 });

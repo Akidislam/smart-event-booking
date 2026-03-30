@@ -359,6 +359,20 @@
             <li><a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'active' : '' }}"><i class="fas fa-house"></i> Home</a></li>
             <li><a href="{{ route('venues.index') }}" class="{{ request()->routeIs('venues.*') ? 'active' : '' }}"><i class="fas fa-building"></i> Venues</a></li>
             <li><a href="{{ route('events.index') }}" class="{{ request()->routeIs('events.*') ? 'active' : '' }}"><i class="fas fa-calendar-days"></i> Events</a></li>
+            <li class="dropdown" style="position:relative;">
+                <a href="{{ route('menu.index') }}" class="{{ request()->routeIs('menu.*') ? 'active' : '' }}" style="cursor:pointer;">
+                    <i class="fas fa-utensils"></i> Menu <i class="fas fa-chevron-down" style="font-size:.6rem;margin-left:.15rem;"></i>
+                </a>
+                <div class="dropdown-menu" style="left:0;right:auto;min-width:220px;">
+                    <a href="{{ route('menu.index') }}"><i class="fas fa-th-large"></i> All Categories</a>
+                    @if(isset($navMenuCategories) && $navMenuCategories->count())
+                        <div class="divider"></div>
+                        @foreach($navMenuCategories as $navCat)
+                            <a href="{{ route('menu.show', $navCat) }}"><i class="{{ $navCat->icon ?: 'fas fa-utensils' }}"></i> {{ $navCat->name }}</a>
+                        @endforeach
+                    @endif
+                </div>
+            </li>
             @auth
                 <li><a href="{{ route('dashboard') }}" class="{{ request()->routeIs('dashboard') ? 'active' : '' }}"><i class="fas fa-gauge"></i> Dashboard</a></li>
                 <li><a href="{{ route('bookings.index') }}" class="{{ request()->routeIs('bookings.*') ? 'active' : '' }}"><i class="fas fa-ticket"></i> My Bookings</a></li>
@@ -391,6 +405,7 @@
                             <div class="divider"></div>
                             <a href="{{ route('admin.dashboard') }}" style="color:var(--warning)"><i class="fas fa-shield-halved"></i> Admin Panel</a>
                             <a href="{{ route('admin.support.index') }}" style="color:var(--warning)"><i class="fas fa-inbox"></i> Support Messages</a>
+                            <a href="{{ route('admin.menu.categories.index') }}" style="color:var(--warning)"><i class="fas fa-utensils"></i> Menu Management</a>
                         @endif
                         <div class="divider"></div>
                         <form action="{{ route('logout') }}" method="POST">
@@ -411,6 +426,7 @@
         <a href="{{ route('home') }}"><i class="fas fa-house"></i> Home</a>
         <a href="{{ route('venues.index') }}"><i class="fas fa-building"></i> Venues</a>
         <a href="{{ route('events.index') }}"><i class="fas fa-calendar-days"></i> Events</a>
+        <a href="{{ route('menu.index') }}"><i class="fas fa-utensils"></i> Food Menu</a>
         @auth
             <a href="{{ route('dashboard') }}"><i class="fas fa-gauge"></i> Dashboard</a>
             <a href="{{ route('bookings.index') }}"><i class="fas fa-ticket"></i> My Bookings</a>
